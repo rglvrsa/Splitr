@@ -1,0 +1,183 @@
+.login-page {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(145deg, #0a0a0a 0%, #121212 50%, #1a1a2e 100%);
+  position: relative;
+  overflow: hidden;
+  padding: 40px 20px;
+}
+
+.login-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.gradient-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.6;
+  animation: float 20s ease-in-out infinite;
+}
+
+.blob-1 {
+  width: 600px;
+  height: 600px;
+  background: linear-gradient(135deg, #1db954 0%, #1ed760 100%);
+  top: -200px;
+  left: -100px;
+  animation-delay: 0s;
+}
+
+.blob-2 {
+  width: 500px;
+  height: 500px;
+  background: linear-gradient(135deg, #2dd4bf 0%, #14b8a6 100%);
+  bottom: -150px;
+  right: -100px;
+  animation-delay: -5s;
+}
+
+.blob-3 {
+  width: 400px;
+  height: 400px;
+  background: linear-gradient(135deg, #1db954 0%, #2dd4bf 100%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  opacity: 0.3;
+  animation-delay: -10s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -30px) scale(1.05);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.95);
+  }
+  75% {
+    transform: translate(20px, 30px) scale(1.02);
+  }
+}
+
+.login-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.login-branding {
+  text-align: center;
+}
+
+.login-logo {
+  height: 70px;
+  width: auto;
+  filter: drop-shadow(0 10px 30px rgba(29, 185, 84, 0.4));
+  animation: logoGlow 3s ease-in-out infinite alternate;
+}
+
+@keyframes logoGlow {
+  0% {
+    filter: drop-shadow(0 10px 30px rgba(29, 185, 84, 0.4));
+  }
+  100% {
+    filter: drop-shadow(0 10px 40px rgba(29, 185, 84, 0.6));
+  }
+}
+
+.login-form-wrapper {
+  width: 100%;
+  animation: slideUp 0.6s ease-out;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-footer {
+  font-family: 'Inter', sans-serif;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.9rem;
+  text-align: center;
+  animation: fadeIn 1s ease-out 0.3s both;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Clerk Development Mode Badge Override - Green Theme */
+.cl-internal-16vtwdp,
+.cl-internal-b3fm6y,
+[class*="cl-internal"] > [style*="background: repeating-linear-gradient"] {
+  background: #141414 !important;
+  border: none !important;
+}
+
+/* Make the development mode text green */
+.cl-internal-1dauvpw,
+[data-localization-key*="development"],
+a[href*="clerk.com"][style*="color"] {
+  color: #1db954 !important;
+}
+
+/* Remove the orange striped pattern */
+.cl-footer,
+.cl-card > div:last-child {
+  background-image: none !important;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .login-page {
+    padding: 20px 15px;
+  }
+  
+  .login-logo {
+    height: 50px;
+  }
+  
+  .login-content {
+    gap: 20px;
+  }
+  
+  .blob-1, .blob-2 {
+    width: 300px;
+    height: 300px;
+  }
+  
+  .blob-3 {
+    width: 200px;
+    height: 200px;
+  }
+}

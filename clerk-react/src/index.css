@@ -1,0 +1,36 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Override Clerk Development Mode Badge - Green Theme */
+.cl-internal-b3fm6y {
+  background: linear-gradient(135deg, #0d3320 0%, #14532d 100%) !important;
+  border: 1px solid #166534 !important;
+}
+
+.cl-internal-1dauvpw {
+  color: #22c55e !important;
+}
+
+/* General override for any Clerk dev badge */
+[data-localization-key="unstable__developmentMode"] {
+  color: #22c55e !important;
+}
+
+/* Override the striped background pattern */
+.cl-footer::after,
+.cl-footerAction::after {
+  background: none !important;
+}

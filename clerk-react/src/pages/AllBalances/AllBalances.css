@@ -1,0 +1,271 @@
+#all-balances {
+  padding: 7vw 4vw 3vw 4vw;
+  font-family: 'A3', sans-serif;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+.page-header {
+  margin-bottom: 2vw;
+}
+
+.header-content h1 {
+  font-size: 2vw;
+  font-weight: 700;
+  color: #111827;
+  margin: 0;
+}
+
+.header-content p {
+  font-size: 0.9vw;
+  color: #6b7280;
+  margin: 0.3vw 0 0 0;
+}
+
+.balances-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
+
+.balance-card {
+  display: flex;
+  align-items: center;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 1vw;
+  padding: 1.2vw 1.8vw;
+  transition: all 0.2s ease;
+}
+
+.balance-card:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+.balance-avatars {
+  display: flex;
+  align-items: center;
+  gap: 0.4vw;
+  margin-right: 1.2vw;
+}
+
+.balance-avatars .avatar,
+.balance-avatars .avatar-img {
+  width: 2.5vw;
+  height: 2.5vw;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85vw;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+.balance-avatars .avatar-img {
+  object-fit: cover;
+}
+
+.balance-avatars .from-avatar {
+  background: #dcfce7;
+  color: #16a34a;
+  border: 2px solid #bbf7d0;
+}
+
+.balance-avatars .to-avatar {
+  background: #e0e7ff;
+  color: #6366f1;
+  border: 2px solid #c7d2fe;
+}
+
+.balance-avatars .arrow {
+  font-size: 1vw;
+  color: #9ca3af;
+  margin: 0 0.2vw;
+}
+
+.balance-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.balance-title {
+  font-size: 1vw;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.2vw 0;
+}
+
+.balance-meta {
+  font-size: 0.8vw;
+  color: #6b7280;
+  margin: 0;
+  display: flex;
+  align-items: baseline;
+  gap: 0.3vw;
+}
+
+.balance-meta .creditor-name {
+  font-weight: 700;
+  color: #111827;
+}
+
+.balance-meta .separator {
+  color: #9ca3af;
+}
+
+.balance-meta .group-name {
+  color: #2db47d;
+  font-weight: 600;
+  font-size: 1vw;
+}
+
+.balance-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2vw;
+  margin-left: 2vw;
+}
+
+.balance-amount {
+  font-size: 1.2vw;
+  font-weight: 700;
+  color: #ef4444;
+}
+
+.settle-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.35vw;
+  padding: 0.55vw 1vw;
+  background: #2db47d;
+  color: white;
+  border: none;
+  border-radius: 0.4vw;
+  font-family: 'A3', sans-serif;
+  font-size: 0.8vw;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.settle-btn:hover {
+  background: #22a06b;
+  transform: scale(1.02);
+}
+
+.settle-btn svg {
+  width: 0.8vw;
+  height: 0.8vw;
+}
+
+/* Empty State */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 5vw 2vw;
+  text-align: center;
+  background: white;
+  border: 2px dashed #e5e7eb;
+  border-radius: 1vw;
+}
+
+.empty-state svg {
+  width: 4vw;
+  height: 4vw;
+  color: #2db47d;
+  margin-bottom: 1vw;
+}
+
+.empty-state h3 {
+  font-size: 1.3vw;
+  font-weight: 600;
+  color: #111827;
+  margin: 0 0 0.5vw 0;
+}
+
+.empty-state p {
+  font-size: 0.9vw;
+  color: #6b7280;
+  margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #all-balances {
+    padding: 20vw 4vw 4vw 4vw;
+  }
+
+  .header-content h1 {
+    font-size: 6vw;
+  }
+
+  .header-content p {
+    font-size: 3.5vw;
+  }
+
+  .balance-card {
+    flex-wrap: wrap;
+    padding: 4vw;
+    gap: 3vw;
+  }
+
+  .balance-avatars .avatar,
+  .balance-avatars .avatar-img {
+    width: 10vw;
+    height: 10vw;
+    font-size: 3vw;
+  }
+
+  .balance-avatars .arrow {
+    font-size: 4vw;
+  }
+
+  .balance-title {
+    font-size: 4vw;
+  }
+
+  .balance-meta {
+    font-size: 3vw;
+  }
+
+  .balance-meta .group-name {
+    font-size: 3.5vw;
+  }
+
+  .balance-right {
+    width: 100%;
+    justify-content: space-between;
+    margin-left: 0;
+  }
+
+  .balance-amount {
+    font-size: 5vw;
+  }
+
+  .settle-btn {
+    padding: 2.5vw 4vw;
+    font-size: 3.5vw;
+  }
+
+  .settle-btn svg {
+    width: 3.5vw;
+    height: 3.5vw;
+  }
+
+  .empty-state svg {
+    width: 15vw;
+    height: 15vw;
+  }
+
+  .empty-state h3 {
+    font-size: 5vw;
+  }
+
+  .empty-state p {
+    font-size: 3.5vw;
+  }
+}

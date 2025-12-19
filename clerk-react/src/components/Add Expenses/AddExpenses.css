@@ -1,0 +1,547 @@
+/* Modal Overlay */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+/* Modal Container */
+.modal-container {
+    background: white;
+    border-radius: 1vw;
+    width: 30vw;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+    font-family: 'A3', sans-serif;
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal Header */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5vw 2vw;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.modal-header h2 {
+    font-size: 1.4vw;
+    font-weight: 600;
+    color: #111827;
+    margin: 0;
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    padding: 0.5vw;
+    cursor: pointer;
+    color: #9ca3af;
+    border-radius: 0.3vw;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.close-btn:hover {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+/* Modal Form */
+.modal-form {
+    padding: 1.5vw 2vw 2vw;
+}
+
+.form-group {
+    margin-bottom: 1.5vw;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9vw;
+    font-weight: 500;
+    color: #374151;
+    margin-bottom: 0.5vw;
+}
+
+.required {
+    color: #ef4444;
+}
+
+/* Select Wrapper */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    width: 100%;
+    padding: 0.9vw 1vw;
+    font-size: 0.95vw;
+    font-family: 'A3', sans-serif;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5vw;
+    background: white;
+    color: #111827;
+    appearance: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.select-wrapper select:focus {
+    outline: none;
+    border-color: #4a7c59;
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+}
+
+.select-arrow {
+    position: absolute;
+    right: 1vw;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: #9ca3af;
+}
+
+/* Text Input */
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 0.9vw 1vw;
+    font-size: 0.95vw;
+    font-family: 'A3', sans-serif;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5vw;
+    color: #111827;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.form-group input[type="text"]:focus {
+    outline: none;
+    border-color: #4a7c59;
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+}
+
+.form-group input::placeholder {
+    color: #9ca3af;
+}
+
+/* Amount Input */
+.amount-input {
+    display: flex;
+    align-items: center;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5vw;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.amount-input:focus-within {
+    border-color: #4a7c59;
+    box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+}
+
+.currency-symbol {
+    padding: 0.9vw 1vw;
+    background: #f9fafb;
+    color: #6b7280;
+    font-size: 1vw;
+    font-weight: 500;
+    border-right: 1px solid #e5e7eb;
+}
+
+.amount-input input {
+    flex: 1;
+    padding: 0.9vw 1vw;
+    font-size: 1.2vw;
+    font-family: 'A3', sans-serif;
+    border: none;
+    color: #111827;
+    text-align: right;
+}
+
+.amount-input input:focus {
+    outline: none;
+}
+
+.amount-input input::placeholder {
+    color: #d1d5db;
+}
+
+/* Split Type Options */
+.split-type-options {
+    display: flex;
+    background: #f3f4f6;
+    border-radius: 0.5vw;
+    padding: 0.3vw;
+}
+
+.split-option {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4vw;
+    padding: 0.7vw 1vw;
+    border: none;
+    background: transparent;
+    font-family: 'A3', sans-serif;
+    font-size: 0.9vw;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 0.4vw;
+    transition: all 0.2s ease;
+}
+
+.split-option:hover {
+    color: #374151;
+}
+
+.split-option.active {
+    background: white;
+    color: #4a7c59;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.split-option svg {
+    width: 1vw;
+    height: 1vw;
+}
+
+.dollar-icon,
+.percent-icon {
+    font-size: 0.9vw;
+    font-weight: 600;
+}
+
+/* Modal Actions */
+.modal-actions {
+    display: flex;
+    gap: 1vw;
+    margin-top: 2vw;
+    padding-top: 1.5vw;
+    border-top: 1px solid #f3f4f6;
+}
+
+.cancel-btn {
+    flex: 1;
+    padding: 0.9vw 1.5vw;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5vw;
+    font-family: 'A3', sans-serif;
+    font-size: 0.95vw;
+    font-weight: 500;
+    color: #374151;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.cancel-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+}
+
+.submit-btn {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vw;
+    padding: 0.9vw 1.5vw;
+    background: #1fa463;
+    border: none;
+    border-radius: 0.5vw;
+    font-family: 'A3', sans-serif;
+    font-size: 0.95vw;
+    font-weight: 500;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(31, 164, 99, 0.3);
+}
+
+.submit-btn:hover {
+    background: #178a52;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(31, 164, 99, 0.4);
+}
+
+.submit-btn:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.submit-btn svg {
+    width: 1vw;
+    height: 1vw;
+}
+
+/* Scrollbar Styling */
+.modal-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+    background: #f3f4f6;
+    border-radius: 3px;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 3px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+    background: #9ca3af;
+}
+
+/* Form Error */
+.form-error {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    color: #dc2626;
+    padding: 0.8vw 1vw;
+    border-radius: 0.5vw;
+    font-size: 0.85vw;
+    margin-bottom: 1vw;
+}
+
+/* Splits Section */
+.splits-section {
+    background: #f9fafb;
+    border-radius: 0.5vw;
+    padding: 1vw;
+}
+
+.splits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8vw;
+}
+
+.split-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 0.8vw 1vw;
+    border-radius: 0.4vw;
+    border: 1px solid #e5e7eb;
+}
+
+.split-member-name {
+    font-size: 0.9vw;
+    font-weight: 500;
+    color: #374151;
+}
+
+.split-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 0.3vw;
+}
+
+.split-input-wrapper input {
+    width: 5vw;
+    padding: 0.5vw;
+    font-size: 0.9vw;
+    font-family: 'A3', sans-serif;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.3vw;
+    text-align: right;
+}
+
+.split-input-wrapper input:focus {
+    outline: none;
+    border-color: #4a7c59;
+}
+
+.split-currency,
+.split-percent {
+    font-size: 0.85vw;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.split-calculated {
+    font-size: 0.8vw;
+    color: #9ca3af;
+    margin-left: 0.5vw;
+}
+
+.splits-total {
+    margin-top: 0.8vw;
+    padding-top: 0.8vw;
+    border-top: 1px solid #e5e7eb;
+    font-size: 0.85vw;
+    color: #6b7280;
+    text-align: right;
+}
+
+/* Equal Split Preview */
+.equal-split-preview {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 0.5vw;
+    padding: 1vw;
+}
+
+.split-preview-text {
+    margin: 0;
+    font-size: 0.9vw;
+    color: #166534;
+    font-weight: 500;
+}
+
+/* Add Expense Modal specific */
+.add-expense-modal {
+    max-height: 90vh;
+}
+
+.add-expense-submit {
+    background: #1fa463 !important;
+    box-shadow: 0 4px 15px rgba(31, 164, 99, 0.3) !important;
+}
+
+.add-expense-submit:hover {
+    background: #178a52 !important;
+    box-shadow: 0 6px 20px rgba(31, 164, 99, 0.4) !important;
+}
+
+/* Multiple Payers Styles */
+.paid-by-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5vw;
+}
+
+.multiple-payers-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5vw;
+    font-size: 0.85vw;
+    color: #6b7280;
+    cursor: pointer;
+}
+
+.multiple-payers-toggle input {
+    width: 1vw;
+    height: 1vw;
+    accent-color: #1fa463;
+    cursor: pointer;
+}
+
+.multiple-payers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vw;
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5vw;
+    padding: 0.8vw;
+    max-height: 12vw;
+    overflow-y: auto;
+}
+
+.payer-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8vw 1vw;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.4vw;
+    transition: all 0.2s ease;
+}
+
+.payer-item.selected {
+    border-color: #1fa463;
+    background: #f0fdf4;
+}
+
+.payer-name {
+    font-size: 0.95vw;
+    font-weight: 500;
+    color: #374151;
+}
+
+.payer-amount-input {
+    display: flex;
+    align-items: center;
+    gap: 0.3vw;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 0.4vw;
+    padding: 0.4vw 0.6vw;
+}
+
+.payer-item.selected .payer-amount-input {
+    background: white;
+    border-color: #1fa463;
+}
+
+.payer-amount-input .currency-symbol {
+    color: #6b7280;
+    font-size: 0.85vw;
+}
+
+.payer-amount-input input {
+    width: 5vw;
+    border: none;
+    outline: none;
+    font-size: 0.85vw;
+    text-align: right;
+    padding: 0;
+}
+
+.payer-amount-input input:disabled {
+    background: #f3f4f6;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.payer-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5vw 0.8vw;
+    border-top: 1px solid #e5e7eb;
+    margin-top: 0.3vw;
+    font-size: 0.85vw;
+    font-weight: 500;
+}
+
+.payer-total .valid {
+    color: #1fa463;
+}
+
+.payer-total .invalid {
+    color: #ef4444;
+}

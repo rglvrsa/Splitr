@@ -1,0 +1,84 @@
+/* Create Group Modal Specific Styles */
+.create-group-modal {
+    width: 30vw;
+}
+
+.create-group-modal textarea {
+    width: 100%;
+    padding: 0.9vw 1vw;
+    font-size: 0.95vw;
+    font-family: 'A3', sans-serif;
+    border: 1px solid #e5e7eb;
+    border-radius: 0.5vw;
+    color: #111827;
+    resize: vertical;
+    min-height: 4vw;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.create-group-modal textarea:focus {
+    outline: none;
+    border-color: #2db47d;
+    box-shadow: 0 0 0 3px rgba(45, 180, 125, 0.1);
+}
+
+.create-group-modal textarea::placeholder {
+    color: #9ca3af;
+}
+
+/* Group Preview */
+.group-preview {
+    display: flex;
+    align-items: center;
+    padding: 1.2vw;
+    background: #f9fafb;
+    border-radius: 0.8vw;
+    border: 1px dashed #e5e7eb;
+    margin-top: 1vw;
+}
+
+.preview-icon {
+    width: 3vw;
+    height: 3vw;
+    background: #dcfce7;
+    color: #2db47d;
+    border-radius: 0.6vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1vw;
+}
+
+.preview-icon svg {
+    width: 1.5vw;
+    height: 1.5vw;
+}
+
+.preview-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.preview-name {
+    font-size: 1.1vw;
+    font-weight: 600;
+    color: #111827;
+}
+
+.preview-desc {
+    font-size: 0.85vw;
+    color: #6b7280;
+    margin-top: 0.2vw;
+}
+
+/* Create Group Submit Button */
+.create-group-submit {
+    background: #2db47d !important;
+    box-shadow: 0 4px 15px rgba(45, 180, 125, 0.3) !important;
+}
+
+.create-group-submit:hover {
+    background: #25a06e !important;
+    box-shadow: 0 6px 20px rgba(45, 180, 125, 0.4) !important;
+}

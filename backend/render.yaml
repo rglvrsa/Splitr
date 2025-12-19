@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: splitr-backend
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_VERSION
+        value: 18
+      - key: MONGODB_URI
+        sync: false
+      - key: PORT
+        value: 8000

@@ -1,9 +1,11 @@
-// API base URL
-const API_URL = process.env.API_URL || 'http://localhost:8000';
+// API base URL - Use VITE_ prefix for Vite environment variables
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
 
 // Helper function for API calls
 const apiRequest = async (endpoint, options = {}) => {
-  const url = `${API_URL}${endpoint}`;
+  // Ensure endpoint starts with /api
+  const fullEndpoint = endpoint.startsWith('/api') ? endpoint : `/api${endpoint}`;
+  const url = `${API_URL}${fullEndpoint}`;
   
   const config = {
     headers: {

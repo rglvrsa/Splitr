@@ -20,7 +20,9 @@ const app = express();
 app.use(cors({
       origin: [        
         "http://localhost:5173",
-        "http://localhost:8000"
+        "http://localhost:8000",
+        "https://splitr-git-main-rgjcl2s-projects.vercel.app",
+        /\.vercel\.app$/  // Allow all Vercel preview URLs
       ],
       methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],

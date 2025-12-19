@@ -26,7 +26,7 @@ const corsOptions = {
       "http://localhost:5173",
       "http://localhost:8000",
       "https://splitr-lake.vercel.app",
-      "https://splitr-git-main-rgjcl2s-projects.vercel.app"
+      "https://splitr-6man.vercel.app/"
     ];
     
     // Check if origin is in allowed list or is a vercel.app domain

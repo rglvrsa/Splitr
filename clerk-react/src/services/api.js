@@ -1,5 +1,6 @@
 // API base URL - Use VITE_ prefix for Vite environment variables
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+console.log("Using API URL:", API_URL);
 
 // Helper function for API calls
 const apiRequest = async (endpoint, options = {}) => {

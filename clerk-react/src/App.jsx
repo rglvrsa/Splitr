@@ -13,17 +13,15 @@ import { Route, Routes } from 'react-router-dom';
 import { AppProvider } from './context/AppContext.jsx';
 import Lenis from 'lenis'
 
-function App() {
-
-// Initialize Lenis
+// Initialize Lenis globally
 const lenis = new Lenis({
   autoRaf: true,
 });
 
-// Listen for the scroll event and log the event data
-lenis.on('scroll', (e) => {
-  console.log(e);
-});
+// Expose lenis to window for stopping/starting from modals
+window.lenis = lenis;
+
+function App() {
 
 
 

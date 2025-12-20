@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './CreateGroup.css'
 
 const CreateGroup = ({ isOpen, onClose, onCreateGroup }) => {
@@ -7,6 +7,18 @@ const CreateGroup = ({ isOpen, onClose, onCreateGroup }) => {
     description: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Stop/Start Lenis when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      window.lenis?.stop();
+    } else {
+      window.lenis?.start();
+    }
+    return () => {
+      window.lenis?.start();
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

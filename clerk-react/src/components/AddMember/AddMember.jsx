@@ -1,8 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './AddMember.css'
 
 const AddMember = ({ isOpen, onClose, members, onAddMember }) => {
   const [email, setEmail] = useState('');
+
+  // Stop/Start Lenis when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      window.lenis?.stop();
+    } else {
+      window.lenis?.start();
+    }
+    return () => {
+      window.lenis?.start();
+    };
+  }, [isOpen]);
 
   if (!isOpen) return null;
 

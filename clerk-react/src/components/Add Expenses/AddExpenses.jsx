@@ -8,6 +8,22 @@ const AddExpenses = ({ isOpen, onClose, groups: propGroups, selectedGroup, membe
   // Use props if provided, otherwise fall back to context
   const groups = propGroups || contextGroups || [];
   
+  // Stop/Start Lenis when modal opens/closes
+  useEffect(() => {
+    if (isOpen) {
+      // Stop Lenis smooth scroll when modal is open
+      window.lenis?.stop();
+    } else {
+      // Resume Lenis smooth scroll when modal closes
+      window.lenis?.start();
+    }
+    
+    // Cleanup: resume Lenis when component unmounts
+    return () => {
+      window.lenis?.start();
+    };
+  }, [isOpen]);
+  
   const [formData, setFormData] = useState({
     groupId: selectedGroup?.id || selectedGroup?._id || '',
     description: '',

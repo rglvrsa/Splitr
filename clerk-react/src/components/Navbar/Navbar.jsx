@@ -18,8 +18,8 @@ const Navbar = () => {
            appearance={{
              elements: {
                avatarBox: {
-                 width: '40px',
-                 height: '40px',
+                 width: '2.5vw',
+                 height: '2.5vw',
                  borderRadius: '50%',
                  border: '2px solid #1db954',
                },

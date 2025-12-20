@@ -6,12 +6,43 @@ import Signup from './pages/Signup/Signup.jsx'
 import Group from './pages/Group/Group.jsx'
 import AllExpenses from './pages/AllExpenses/AllExpenses.jsx'
 import AllBalances from './pages/AllBalances/AllBalances.jsx'
+import Footer from './components/Footer/Footer.jsx'
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { AppProvider } from './context/AppContext.jsx';
+import Lenis from 'lenis'
 
 function App() {
+
+// Initialize Lenis
+const lenis = new Lenis({
+  autoRaf: true,
+});
+
+// Listen for the scroll event and log the event data
+lenis.on('scroll', (e) => {
+  console.log(e);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   const [isSignUp, setIsSignUp] = useState(false);
 
   useEffect(() => {
@@ -23,6 +54,12 @@ function App() {
     window.addEventListener('hashchange', checkHash);
     return () => window.removeEventListener('hashchange', checkHash);
   }, []);
+
+
+
+
+
+
 
   return (
     <>
@@ -38,6 +75,7 @@ function App() {
             <Route path="/all-expenses" element={<AllExpenses />} />
             <Route path="/all-balances" element={<AllBalances />} />
           </Routes>
+          <Footer />
         </AppProvider>
       </SignedIn>
     </>

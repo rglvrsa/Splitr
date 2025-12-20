@@ -1,5 +1,6 @@
 // API base URL - Use VITE_ prefix for Vite environment variables
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+// Remove trailing slash if present
+const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
 console.log("Using API URL:", API_URL);
 
 // Helper function for API calls
@@ -7,6 +8,7 @@ const apiRequest = async (endpoint, options = {}) => {
   // Ensure endpoint starts with /api
   const fullEndpoint = endpoint.startsWith('/api') ? endpoint : `/api${endpoint}`;
   const url = `${API_URL}${fullEndpoint}`;
+  console.log("Fetching:", url);
   
   const config = {
     headers: {
@@ -28,9 +30,9 @@ const apiRequest = async (endpoint, options = {}) => {
     return data;
   } catch (error) {
     // Network error or JSON parse error
-    if (error.name === 'TypeError' && error.message.includes('fetch')) {
-      console.error('Network error - Is the backend server running?');
-      throw new Error('Cannot connect to server. Please ensure the backend is running on port 8000.');
+    if (error.name === 'TypeError') {
+      console.error('Network error:', error.message);
+      throw new Error(`Cannot connect to server at ${API_URL}. Check if backend is deployed.`);
     }
     throw error;
   }

@@ -172,7 +172,7 @@ const Dashboard = () => {
                       </span>
                     </div>
                     <div className="expense-amount-section">
-                      <span className="expense-amount">Rs {expense.amount?.toFixed(2)}</span>
+                      <span className="expense-amount">₹ {expense.amount?.toFixed(2)}</span>
                       <span className="expense-tag">{expense.splitType}</span>
                     </div>
                   </div>

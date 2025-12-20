@@ -70,7 +70,7 @@ const AllExpenses = () => {
                 </p>
               </div>
               <div className="expense-amount-section">
-                <span className="expense-amount">${expense.amount?.toFixed(2)}</span>
+                <span className="expense-amount">₹ {expense.amount?.toFixed(2)}</span>
                 <span className={`expense-tag ${expense.splitType}`}>{expense.splitType}</span>
               </div>
             </div>

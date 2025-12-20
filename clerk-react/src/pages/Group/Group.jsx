@@ -618,7 +618,7 @@ const Group = () => {
                   </div>
                   <div className="stat">
                     <span className="stat-label">Total</span>
-                    <span className="stat-value">${group.total.toFixed(2)}</span>
+                    <span className="stat-value">₹{group.total.toFixed(2)}</span>
                   </div>
                 </div>
                 <div className="group-members">

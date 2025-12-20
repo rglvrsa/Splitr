@@ -1,14 +1,14 @@
 // API base URL - Use VITE_ prefix for Vite environment variables
 // Remove trailing slash if present
 const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
-console.log("Using API URL:", API_URL);
+//console.log("Using API URL:", API_URL);
 
 // Helper function for API calls
 const apiRequest = async (endpoint, options = {}) => {
   // Ensure endpoint starts with /api
   const fullEndpoint = endpoint.startsWith('/api') ? endpoint : `/api${endpoint}`;
   const url = `${API_URL}${fullEndpoint}`;
-  console.log("Fetching:", url);
+ // console.log("Fetching:", url);
   
   const config = {
     headers: {

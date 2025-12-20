@@ -13,14 +13,20 @@ const AddExpenses = ({ isOpen, onClose, groups: propGroups, selectedGroup, membe
     if (isOpen) {
       // Stop Lenis smooth scroll when modal is open
       window.lenis?.stop();
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
     } else {
       // Resume Lenis smooth scroll when modal closes
       window.lenis?.start();
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     }
     
     // Cleanup: resume Lenis when component unmounts
     return () => {
       window.lenis?.start();
+      document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
     };
   }, [isOpen]);
   
@@ -338,20 +344,21 @@ const AddExpenses = ({ isOpen, onClose, groups: propGroups, selectedGroup, membe
           </button>
         </div>
 
-        <form className="modal-form" onSubmit={handleSubmit}>
-          {error && <div className="form-error">{error}</div>}
-          
-          <div className="form-group">
-            <label>Group <span className="required">*</span></label>
-            <div className="select-wrapper">
-              <select 
-                name="groupId" 
-                value={formData.groupId} 
-                onChange={handleInputChange}
-                required
-              >
-                <option value="">Select a group</option>
-                {groups?.map((group) => (
+  <div className="add-expense-modal-content" data-lenis-prevent>
+          <form className="modal-form" onSubmit={handleSubmit}>
+            {error && <div className="form-error">{error}</div>}
+            {/* ...existing form content... */}
+            <div className="form-group">
+              <label>Group <span className="required">*</span></label>
+              <div className="select-wrapper">
+                <select 
+                  name="groupId" 
+                  value={formData.groupId} 
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="">Select a group</option>
+                  {groups?.map((group) => (
                   <option key={group.id || group._id} value={group.id || group._id}>
                     {group.name}
                   </option>
@@ -576,7 +583,8 @@ const AddExpenses = ({ isOpen, onClose, groups: propGroups, selectedGroup, membe
               )}
             </button>
           </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   )

@@ -34,3 +34,27 @@ h1, h2, h3, h4, h5, h6 {
 .cl-footerAction::after {
   background: none !important;
 }
+
+/* Fix for Lenis scroll hijacking modals */
+.modal-overlay,
+.modal-container {
+  pointer-events: auto;
+}
+
+.modal-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-container::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.modal-container::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+.modal-container::-webkit-scrollbar-thumb:hover {
+  background: #a1a1a1;
+}

@@ -11,6 +11,7 @@
     justify-content: center;
     z-index: 1000;
     backdrop-filter: blur(4px);
+    overscroll-behavior: contain;
 }
 
 /* Modal Container */
@@ -20,9 +21,13 @@
     width: 30vw;
     max-height: 85vh;
     overflow-y: auto;
+    overflow-x: hidden;
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     font-family: 'A3', sans-serif;
     animation: modalSlideIn 0.3s ease;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
 }
 
 @keyframes modalSlideIn {
@@ -422,6 +427,21 @@
 /* Add Expense Modal specific */
 .add-expense-modal {
     max-height: 90vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Utility: Use this on the modal's main content wrapper if needed */
+.add-expense-modal-content {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    touch-action: pan-y;
 }
 
 .add-expense-submit {

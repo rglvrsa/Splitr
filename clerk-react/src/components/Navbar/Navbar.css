@@ -68,6 +68,58 @@
 }
 
 #navdash i {
-    font-size: 16px;
+    font-size: 1.2vw;
     color: #374151;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #navbar {
+        height: 60px;
+        padding: 0 16px;
+    }
+
+    #navbarleft #navlogo {
+        height: 45px;
+    }
+
+    #navbarright {
+        gap: 10px;
+    }
+
+    #navdash {
+        font-size: 13px;
+        padding: 8px 12px;
+        gap: 6px;
+        border-radius: 8px;
+    }
+
+    #navdash i {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #navbar {
+        height: 55px;
+        padding: 0 12px;
+    }
+
+    #navbarleft #navlogo {
+        height: 40px;
+    }
+
+    #navbarright {
+        gap: 8px;
+    }
+
+    #navdash {
+        font-size: 12px;
+        padding: 6px 10px;
+        gap: 5px;
+    }
+
+    #navdash i {
+        font-size: 14px;
+    }
 }

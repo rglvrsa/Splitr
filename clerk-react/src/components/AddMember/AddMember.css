@@ -151,3 +151,186 @@
     background: #25a06e !important;
     box-shadow: 0 6px 20px rgba(45, 180, 125, 0.4) !important;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .add-member-modal {
+        width: 90vw;
+        max-width: 500px;
+        min-width: auto;
+    }
+
+    .email-icon {
+        left: 14px;
+        font-size: 18px;
+    }
+
+    .email-input-wrapper input {
+        padding: 12px 14px 12px 44px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    .helper-text {
+        font-size: 13px;
+        margin-top: 6px;
+    }
+
+    .current-members-section {
+        margin-top: 16px;
+    }
+
+    .current-members-section h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .members-list {
+        gap: 10px;
+    }
+
+    .member-item {
+        padding: 12px 14px;
+        border-radius: 10px;
+    }
+
+    .member-profile-img,
+    .member-avatar-large {
+        width: 44px;
+        height: 44px;
+        margin-right: 12px;
+    }
+
+    .member-avatar-large {
+        font-size: 16px;
+    }
+
+    .member-name {
+        font-size: 15px;
+    }
+
+    .member-email {
+        font-size: 13px;
+    }
+
+    .member-badge {
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    .add-member-modal {
+        width: 95vw;
+    }
+
+    .email-input-wrapper input {
+        padding: 10px 12px 10px 40px;
+        font-size: 14px;
+    }
+
+    .email-icon {
+        left: 12px;
+        font-size: 16px;
+    }
+
+    .helper-text {
+        font-size: 12px;
+    }
+
+    .current-members-section h3 {
+        font-size: 15px;
+    }
+
+    .member-item {
+        padding: 10px 12px;
+    }
+
+    .member-profile-img,
+    .member-avatar-large {
+        width: 40px;
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .member-avatar-large {
+        font-size: 15px;
+    }
+
+    .member-name {
+        font-size: 14px;
+    }
+
+    .member-email {
+        font-size: 12px;
+    }
+
+    .member-badge {
+        padding: 5px 10px;
+        font-size: 11px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .add-member-modal {
+        width: 95vw;
+        min-width: auto;
+    }
+
+    .email-icon {
+        left: 14px;
+    }
+
+    .email-input-wrapper input {
+        padding: 12px 14px 12px 42px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    .helper-text {
+        font-size: 13px;
+        margin-top: 6px;
+    }
+
+    .current-members-section {
+        margin-top: 20px;
+    }
+
+    .current-members-section h3 {
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+
+    .members-list {
+        gap: 10px;
+    }
+
+    .member-item {
+        padding: 12px 14px;
+        border-radius: 8px;
+    }
+
+    .member-profile-img,
+    .member-avatar-large {
+        width: 44px;
+        height: 44px;
+        margin-right: 12px;
+        font-size: 16px;
+    }
+
+    .member-name {
+        font-size: 15px;
+    }
+
+    .member-email {
+        font-size: 13px;
+    }
+
+    .member-badge {
+        padding: 4px 10px;
+        border-radius: 12px;
+        font-size: 12px;
+    }
+}

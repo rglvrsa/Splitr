@@ -30,9 +30,9 @@ const apiRequest = async (endpoint, options = {}) => {
     return data;
   } catch (error) {
     // Network error or JSON parse error
-    if (error.name === 'TypeError') {
-      console.error('Network error:', error.message);
-      throw new Error(`Cannot connect to server at ${API_URL}. Check if backend is deployed.`);
+    if (error.name === 'TypeError' || error.message.includes('fetch')) {
+      // Silently fail for network errors - backend might not be deployed
+      throw new Error(`Backend API not available`);
     }
     throw error;
   }

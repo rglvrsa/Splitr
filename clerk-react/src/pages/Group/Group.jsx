@@ -311,11 +311,69 @@ const Group = () => {
         paymentMethod: 'cash'
       });
       
-      // Refresh group data after settlement (no alert, just update UI)
+      // Refresh group data after settlement
       await refreshGroupData();
     } catch (err) {
       console.error('Failed to settle:', err);
     }
+  };
+
+  // Handle Google Pay payment
+  const handleGooglePay = (settlement) => {
+    const receiverEmail = settlement.to?.email;
+    const amount = settlement.amount.toFixed(2);
+    const receiverName = settlement.to?.fullName || 'Unknown';
+    
+    if (!receiverEmail) {
+      alert('Receiver email not found. Cannot proceed with payment.');
+      return;
+    }
+
+    const gpayUrl = `tez://upi/pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${selectedGroup.name}`)}`;
+    const upiUrl = `upi://pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${selectedGroup.name}`)}`;
+    
+    const link = document.createElement('a');
+    link.href = gpayUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setTimeout(() => {
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = upiUrl;
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      document.body.removeChild(fallbackLink);
+    }, 1000);
+  };
+
+  // Handle PhonePe payment
+  const handlePhonePe = (settlement) => {
+    const receiverEmail = settlement.to?.email;
+    const amount = settlement.amount.toFixed(2);
+    const receiverName = settlement.to?.fullName || 'Unknown';
+    
+    if (!receiverEmail) {
+      alert('Receiver email not found. Cannot proceed with payment.');
+      return;
+    }
+
+    const phonepeUrl = `phonepe://pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${selectedGroup.name}`)}`;
+    const upiUrl = `upi://pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${selectedGroup.name}`)}`;
+    
+    const link = document.createElement('a');
+    link.href = phonepeUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setTimeout(() => {
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = upiUrl;
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      document.body.removeChild(fallbackLink);
+    }, 1000);
   };
 
   // Handle settle button click (for API-based simplified settlements)
@@ -329,7 +387,7 @@ const Group = () => {
         paymentMethod: 'cash'
       });
       
-      // Refresh group data after settlement (no alert, just update UI)
+      // Refresh group data after settlement
       await refreshGroupData();
     } catch (err) {
       console.error('Failed to settle:', err);
@@ -550,7 +608,11 @@ const Group = () => {
                       <span>{settlement.to?.fullName || 'Unknown'}</span>
                     </div>
                     <div className="settle-amount">₹{settlement.amount.toFixed(2)}</div>
-                    <button className="settle-btn" onClick={() => handleSettleFromAPI(settlement)}>Settle</button>
+                    <div className="settle-actions">
+                      <button className="settle-btn-simple" onClick={() => handleSettleFromAPI(settlement)}>
+                        Settle
+                      </button>
+                    </div>
                   </div>
                 ))
               )}

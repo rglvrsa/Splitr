@@ -82,3 +82,121 @@
     background: #25a06e !important;
     box-shadow: 0 6px 20px rgba(45, 180, 125, 0.4) !important;
 }
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .create-group-modal {
+        width: 90vw;
+        max-width: 500px;
+    }
+
+    .create-group-modal textarea {
+        padding: 12px 14px;
+        font-size: 15px;
+        border-radius: 8px;
+        min-height: 80px;
+    }
+
+    .group-preview {
+        padding: 14px;
+        border-radius: 10px;
+        margin-top: 12px;
+    }
+
+    .preview-icon {
+        width: 50px;
+        height: 50px;
+        border-radius: 10px;
+        margin-right: 14px;
+    }
+
+    .preview-icon svg {
+        width: 26px;
+        height: 26px;
+    }
+
+    .preview-name {
+        font-size: 16px;
+    }
+
+    .preview-desc {
+        font-size: 14px;
+        margin-top: 4px;
+    }
+}
+
+@media (max-width: 480px) {
+    .create-group-modal {
+        width: 95vw;
+    }
+
+    .create-group-modal textarea {
+        padding: 10px 12px;
+        font-size: 14px;
+        min-height: 70px;
+    }
+
+    .group-preview {
+        padding: 12px;
+    }
+
+    .preview-icon {
+        width: 45px;
+        height: 45px;
+        margin-right: 12px;
+    }
+
+    .preview-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .preview-name {
+        font-size: 15px;
+    }
+
+    .preview-desc {
+        font-size: 13px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .create-group-modal {
+        width: 95vw;
+    }
+
+    .create-group-modal textarea {
+        padding: 12px 14px;
+        font-size: 15px;
+        border-radius: 8px;
+        min-height: 80px;
+    }
+
+    .group-preview {
+        padding: 14px;
+        border-radius: 10px;
+        margin-top: 12px;
+    }
+
+    .preview-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 8px;
+        margin-right: 12px;
+    }
+
+    .preview-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .preview-name {
+        font-size: 16px;
+    }
+
+    .preview-desc {
+        font-size: 13px;
+        margin-top: 4px;
+    }
+}

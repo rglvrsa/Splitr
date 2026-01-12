@@ -5,3 +5,16 @@ body{
 }
 
 /* Font Imports */
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    body {
+        overflow-x: hidden;
+        width: 100%;
+        position: relative;
+    }
+
+    * {
+        -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    }
+}

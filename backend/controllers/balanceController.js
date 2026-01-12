@@ -51,7 +51,7 @@ export const getGroupBalances = async (req, res) => {
       .populate("fromUser", "fullName email imageUrl")
       .populate("toUser", "fullName email imageUrl");
 
-    // Aggregate balances by unique user pair to avoid duplicates
+    // Aggregate balances by unique user pair to avoid duplicates like A->B=100 and B->A=50 so A->B=50
     const balanceMap = new Map();
     
     allBalances.forEach((b) => {

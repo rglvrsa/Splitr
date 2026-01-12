@@ -530,6 +530,109 @@
     margin-left: auto;
 }
 
+.settle-actions {
+    display: flex;
+    gap: 0.5vw;
+    align-items: center;
+}
+
+.settle-btn-simple {
+    padding: 0.6vw 1.2vw;
+    background: #2db47d;
+    color: white;
+    border: none;
+    border-radius: 0.4vw;
+    font-family: 'A3', sans-serif;
+    font-size: 0.85vw;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.settle-btn-simple:hover {
+    background: #25a06e;
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(45, 180, 125, 0.3);
+}
+
+.pay-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4vw;
+    padding: 0.6vw 1.2vw;
+    border: none;
+    border-radius: 0.4vw;
+    font-family: 'A3', sans-serif;
+    font-size: 0.85vw;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.payment-icon {
+    width: 1.2vw;
+    height: 1.2vw;
+    object-fit: contain;
+}
+
+.gpay-btn {
+    background: white;
+    color: #3c4043;
+    border: 1px solid #dadce0;
+    box-shadow: 0 1px 3px rgba(60, 64, 67, 0.3);
+}
+
+.gpay-btn:hover {
+    background: #f8f9fa;
+    box-shadow: 0 2px 6px rgba(60, 64, 67, 0.3);
+    transform: scale(1.05);
+}
+
+.gpay-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2vw;
+    height: 1.2vw;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc05 75%, #ea4335 100%);
+    color: white;
+    font-weight: 700;
+    font-size: 0.7vw;
+    font-family: 'Product Sans', 'Google Sans', Arial, sans-serif;
+}
+
+.phonepe-btn {
+    background: #5f259f;
+    color: white;
+}
+
+.phonepe-btn:hover {
+    background: #4d1e7f;
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(95, 37, 159, 0.3);
+}
+
+.phonepe-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.2vw;
+    height: 1.2vw;
+    border-radius: 50%;
+    background: white;
+    color: #5f259f;
+    font-weight: 900;
+    font-size: 0.8vw;
+}
+
+.pay-btn svg {
+    width: 1vw;
+    height: 1vw;
+}
+
 .settle-btn {
     background: #2db47d;
     color: white;
@@ -541,9 +644,589 @@
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.4vw;
+}
+
+.settle-btn svg {
+    width: 1vw;
+    height: 1vw;
 }
 
 .settle-btn:hover {
     background: #25a06e;
     transform: translateY(-1px);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #group {
+        margin-top: 60px;
+        min-height: 100vh;
+        padding: 0 16px;
+    }
+
+    #grouphead {
+        font-size: 24px;
+        margin: 20px 0;
+    }
+
+    #grouphead h6 {
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    #grouphead h1 {
+        font-size: 28px;
+    }
+
+    #groupmainbut {
+        margin: 0 0 20px 0;
+    }
+
+    .create-group-btn {
+        width: 100%;
+        font-size: 15px;
+        padding: 12px 20px;
+        border-radius: 10px;
+    }
+
+    #groupmainlist {
+        flex-direction: column;
+        gap: 16px;
+        margin: 0;
+    }
+
+    .group-card {
+        width: 100%;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .group-icon {
+        padding: 12px;
+        border-radius: 10px;
+    }
+
+    .group-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .group-arrow {
+        font-size: 24px;
+    }
+
+    .group-name {
+        font-size: 20px;
+        margin-bottom: 12px;
+    }
+
+    .group-stats {
+        gap: 24px;
+        margin-bottom: 16px;
+        padding-bottom: 12px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+        margin-bottom: 4px;
+    }
+
+    .stat-value {
+        font-size: 16px;
+    }
+
+    .member-avatar,
+    .member-avatar-img {
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+    }
+
+    /* Group Detail View Mobile */
+    #groupdetail {
+        margin: 0 16px;
+    }
+
+    .back-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        border-radius: 8px;
+        gap: 8px;
+        margin-bottom: 16px;
+    }
+
+    .back-btn span {
+        font-size: 18px;
+    }
+
+    .detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 20px;
+    }
+
+    .detail-title {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+
+    .detail-members-info {
+        gap: 12px;
+    }
+
+    .members-count {
+        font-size: 14px;
+    }
+
+    .detail-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 10px;
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    .add-member-btn,
+    .add-expense-btn {
+        width: 100%;
+        padding: 12px 18px;
+        font-size: 15px;
+        border-radius: 10px;
+        justify-content: center;
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    .detail-tabs {
+        border-radius: 10px;
+        padding: 4px;
+        margin-bottom: 16px;
+    }
+
+    .tab {
+        padding: 10px 16px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .tab svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .expenses-list,
+    .balances-list,
+    .settle-list {
+        gap: 12px;
+    }
+
+    .expense-item,
+    .balance-item,
+    .settle-item {
+        padding: 16px;
+        border-radius: 10px;
+    }
+
+    .expense-icon {
+        padding: 12px;
+        border-radius: 8px;
+        margin-right: 12px;
+    }
+
+    .expense-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .expense-title,
+    .balance-name {
+        font-size: 16px;
+    }
+
+    .expense-meta,
+    .balance-meta {
+        font-size: 13px;
+    }
+
+    .split-badge {
+        padding: 4px 8px;
+        font-size: 11px;
+        border-radius: 6px;
+    }
+
+    .expense-amount,
+    .balance-amount,
+    .settle-amount {
+        font-size: 18px;
+    }
+
+    .settle-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .settle-btn-simple {
+        padding: 10px 16px;
+        font-size: 13px;
+        border-radius: 8px;
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .pay-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+        border-radius: 8px;
+        flex: 1;
+        min-width: 90px;
+        gap: 6px;
+    }
+
+    .payment-icon {
+        width: 18px;
+        height: 18px;
+    }
+
+    .pay-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .gpay-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 11px;
+    }
+
+    .phonepe-icon {
+        width: 18px;
+        height: 18px;
+        font-size: 12px;
+    }
+
+    .settle-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+        border-radius: 8px;
+        gap: 6px;
+    }
+
+    .settle-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .empty-state {
+        padding: 40px 20px;
+    }
+
+    .empty-state svg {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    #grouphead h1 {
+        font-size: 24px;
+    }
+
+    #grouphead h6 {
+        font-size: 13px;
+    }
+
+    .create-group-btn {
+        font-size: 14px;
+        padding: 10px 16px;
+    }
+
+    .group-card {
+        padding: 16px;
+    }
+
+    .group-name {
+        font-size: 18px;
+    }
+
+    .stat-label {
+        font-size: 10px;
+    }
+
+    .stat-value {
+        font-size: 14px;
+    }
+
+    .detail-title {
+        font-size: 24px;
+    }
+
+    .tab {
+        padding: 8px 12px;
+        font-size: 13px;
+    }
+
+    .expense-title,
+    .balance-name {
+        font-size: 15px;
+    }
+
+    .expense-amount,
+    .balance-amount {
+        font-size: 16px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    #group {
+        margin-top: 70px;
+        min-height: 100vh;
+        padding: 0 16px;
+    }
+
+    #grouphead {
+        font-size: 18px;
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    #grouphead h1 {
+        font-size: 32px;
+    }
+
+    #grouphead h6 {
+        font-size: 14px;
+        margin-top: 4px;
+    }
+
+    #groupmainbut {
+        margin-left: 0;
+        margin-bottom: 20px;
+    }
+
+    .create-group-btn {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 24px;
+        border-radius: 8px;
+    }
+
+    #groupmainlist {
+        flex-direction: column;
+        gap: 16px;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .group-card {
+        width: 100%;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .group-card-header {
+        margin-bottom: 16px;
+    }
+
+    .group-icon {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .group-icon svg {
+        width: 24px;
+        height: 24px;
+    }
+
+    .group-arrow svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .group-name {
+        font-size: 20px;
+        margin-bottom: 6px;
+    }
+
+    .group-members-count {
+        font-size: 14px;
+    }
+
+    .group-stats {
+        gap: 16px;
+        margin-top: 16px;
+        padding-top: 16px;
+    }
+
+    .stat h4 {
+        font-size: 18px;
+    }
+
+    .stat p {
+        font-size: 13px;
+    }
+
+    .group-detail-page {
+        padding: 80px 16px 20px 16px;
+    }
+
+    .group-detail-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 24px;
+    }
+
+    .header-left {
+        gap: 12px;
+    }
+
+    .group-detail-icon {
+        width: 60px;
+        height: 60px;
+    }
+
+    .group-detail-icon svg {
+        width: 30px;
+        height: 30px;
+    }
+
+    .group-detail-info h1 {
+        font-size: 28px;
+    }
+
+    .group-detail-info p {
+        font-size: 14px;
+    }
+
+    .header-actions {
+        width: 100%;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .add-member-btn,
+    .add-expense-btn {
+        width: 100%;
+        font-size: 15px;
+        padding: 12px 20px;
+        justify-content: center;
+        display: flex !important;
+        visibility: visible !important;
+    }
+
+    .group-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .expenses-section,
+    .members-section {
+        width: 100%;
+        padding: 20px;
+        border-radius: 12px;
+    }
+
+    .section-header h2 {
+        font-size: 20px;
+    }
+
+    .expense-item {
+        padding: 14px;
+    }
+
+    .expense-icon {
+        width: 44px;
+        height: 44px;
+    }
+
+    .expense-icon svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .expense-details h4 {
+        font-size: 15px;
+    }
+
+    .expense-meta {
+        font-size: 12px;
+    }
+
+    .expense-amount {
+        font-size: 18px;
+    }
+
+    .expense-tag {
+        font-size: 11px;
+        padding: 4px 8px;
+    }
+
+    .member-item {
+        padding: 14px;
+    }
+
+    .member-avatar {
+        width: 44px;
+        height: 44px;
+        font-size: 16px;
+    }
+
+    .member-info h4 {
+        font-size: 15px;
+    }
+
+    .member-info p {
+        font-size: 12px;
+    }
+
+    .member-balance {
+        font-size: 15px;
+    }
+
+    .balance-item {
+        padding: 14px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .balance-users {
+        gap: 8px;
+    }
+
+    .balance-user {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+    }
+
+    .balance-arrow {
+        transform: rotate(90deg);
+    }
+
+    .balance-info {
+        width: 100%;
+    }
+
+    .balance-text {
+        font-size: 14px;
+    }
+
+    .balance-amount {
+        font-size: 16px;
+    }
+
+    .settle-btn {
+        width: 100%;
+        padding: 10px 16px;
+        font-size: 14px;
+    }
 }

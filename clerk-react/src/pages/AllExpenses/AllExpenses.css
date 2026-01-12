@@ -22,7 +22,7 @@
 }
 
 .header-content p {
-    font-size: 0.9vw;
+    font-size: 2vw;
     color: #6b7280;
     margin: 0;
 }
@@ -171,55 +171,129 @@
 /* Responsive */
 @media (max-width: 768px) {
     #all-expenses {
-        padding: 20vw 4vw 4vw 4vw;
+        padding: 80px 16px 20px 16px;
+        min-height: 100vh;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+        margin-bottom: 20px;
     }
 
     .header-content h1 {
-        font-size: 6vw;
+        font-size: 32px;
+        margin-bottom: 4px;
     }
 
     .header-content p {
-        font-size: 3.5vw;
+        font-size: 14px;
     }
 
     .add-expense-btn {
-        padding: 2.5vw 4vw;
-        font-size: 3.5vw;
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 15px;
+        border-radius: 10px;
+        justify-content: center;
+    }
+
+    .expenses-container {
+        gap: 12px;
     }
 
     .expense-card {
-        padding: 4vw;
+        padding: 16px;
+        border-radius: 12px;
     }
 
     .expense-icon {
-        width: 12vw;
-        height: 12vw;
-        margin-right: 4vw;
+        width: 48px;
+        height: 48px;
+        margin-right: 12px;
     }
 
     .expense-icon svg {
-        width: 5vw;
-        height: 5vw;
+        width: 24px;
+        height: 24px;
     }
 
     .expense-title {
-        font-size: 4vw;
+        font-size: 16px;
     }
 
     .expense-meta {
-        font-size: 3vw;
+        font-size: 13px;
+        flex-wrap: wrap;
     }
 
     .group-name {
-        font-size: 3.5vw;
+        font-size: 14px;
     }
 
     .expense-amount {
-        font-size: 4.5vw;
+        font-size: 20px;
     }
 
     .expense-tag {
-        font-size: 2.5vw;
-        padding: 1vw 2vw;
+        font-size: 11px;
+        padding: 4px 8px;
+        border-radius: 6px;
+    }
+
+    .expense-amount-section {
+        margin-left: 12px;
+    }
+}
+
+@media (max-width: 480px) {
+    #all-expenses {
+        padding: 70px 12px 16px 12px;
+    }
+
+    .header-content h1 {
+        font-size: 28px;
+    }
+
+    .header-content p {
+        font-size: 13px;
+    }
+
+    .add-expense-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .expense-card {
+        padding: 14px;
+    }
+
+    .expense-icon {
+        width: 44px;
+        height: 44px;
+        margin-right: 10px;
+    }
+
+    .expense-icon svg {
+        width: 22px;
+        height: 22px;
+    }
+
+    .expense-title {
+        font-size: 15px;
+    }
+
+    .expense-meta {
+        font-size: 12px;
+    }
+
+    .expense-amount {
+        font-size: 18px;
+    }
+
+    .expense-tag {
+        font-size: 10px;
+        padding: 3px 6px;
     }
 }

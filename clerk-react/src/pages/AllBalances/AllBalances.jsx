@@ -18,7 +18,7 @@ const AllBalances = () => {
     return group ? group.name : 'Unknown Group';
   };
 
-  // Handle settle balance
+  // Handle settle balance - just mark as settled
   const handleSettle = async (balance) => {
     console.log("Settling balance:", balance);
     setSettling(balance._id);
@@ -33,16 +33,10 @@ const AllBalances = () => {
 
       if (balance.type === 'owe') {
         // You owe someone, so you're paying them
-        // paidBy = current user (will be set by backend from clerkId)
-        // paidTo = the person you owe
         settleData.paidTo = balance.toUser?._id || balance.user?._id;
-        // Let backend get current user from clerkId
       } else {
         // Someone owes you (type === 'owed'), so they're paying you
-        // paidBy = the person who owes you
-        // paidTo = current user (will be set by backend from clerkId)
         settleData.paidBy = balance.fromUser?._id || balance.user?._id;
-        // Let backend get current user as paidTo from clerkId
       }
 
       console.log("Settle data:", settleData);
@@ -53,6 +47,78 @@ const AllBalances = () => {
     } finally {
       setSettling(null);
     }
+  };
+
+  // Handle payment via Google Pay
+  const handleGooglePay = (balance) => {
+    if (balance.type !== 'owe') {
+      alert('This person owes you money. They need to initiate the payment.');
+      return;
+    }
+    
+    const receiverEmail = balance.toUser?.email;
+    const receiverName = balance.toName;
+    const amount = balance.amount.toFixed(2);
+    const groupName = balance.groupName || 'Splitr';
+    
+    if (!receiverEmail) {
+      alert('Receiver email not found. Cannot proceed with payment.');
+      return;
+    }
+
+    // Google Pay deep link
+    const gpayUrl = `tez://upi/pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    const upiUrl = `upi://pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    
+    const link = document.createElement('a');
+    link.href = gpayUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setTimeout(() => {
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = upiUrl;
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      document.body.removeChild(fallbackLink);
+    }, 1000);
+  };
+
+  // Handle payment via PhonePe
+  const handlePhonePe = (balance) => {
+    if (balance.type !== 'owe') {
+      alert('This person owes you money. They need to initiate the payment.');
+      return;
+    }
+    
+    const receiverEmail = balance.toUser?.email;
+    const receiverName = balance.toName;
+    const amount = balance.amount.toFixed(2);
+    const groupName = balance.groupName || 'Splitr';
+    
+    if (!receiverEmail) {
+      alert('Receiver email not found. Cannot proceed with payment.');
+      return;
+    }
+
+    // PhonePe deep link
+    const phonepeUrl = `phonepe://pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    const upiUrl = `upi://pay?pa=${encodeURIComponent(receiverEmail)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    
+    const link = document.createElement('a');
+    link.href = phonepeUrl;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    
+    setTimeout(() => {
+      const fallbackLink = document.createElement('a');
+      fallbackLink.href = upiUrl;
+      document.body.appendChild(fallbackLink);
+      fallbackLink.click();
+      document.body.removeChild(fallbackLink);
+    }, 1000);
   };
 
   // Combine youOwe and youAreOwed into a single list for display
@@ -156,22 +222,33 @@ const AllBalances = () => {
               </div>
               <div className="balance-right">
                 <span className="balance-amount">₹{balance.amount.toFixed(2)}</span>
-                <button 
-                  className="settle-btn" 
-                  onClick={() => handleSettle(balance)}
-                  disabled={settling === balance._id}
-                >
-                  {settling === balance._id ? (
-                    'Settling...'
-                  ) : (
+                <div className="balance-buttons">
+                  <button 
+                    className="settle-btn-simple" 
+                    onClick={() => handleSettle(balance)}
+                    disabled={settling === balance._id}
+                  >
+                    {settling === balance._id ? 'Settling...' : 'Settle'}
+                  </button>
+                  {balance.type === 'owe' && (
                     <>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                      Settle
+                      <button 
+                        className="pay-btn gpay-btn" 
+                        onClick={() => handleGooglePay(balance)}
+                      >
+                        <img src="/Images/logo4.png" alt="GPay" className="payment-icon" />
+                        GPay
+                      </button>
+                      <button 
+                        className="pay-btn phonepe-btn" 
+                        onClick={() => handlePhonePe(balance)}
+                      >
+                        <img src="/Images/logo5.jpg" alt="PhonePe" className="payment-icon" />
+                        PhonePe
+                      </button>
                     </>
                   )}
-                </button>
+                </div>
               </div>
             </div>
           ))

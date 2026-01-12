@@ -25,23 +25,25 @@ export const AppProvider = ({ children }) => {
         return;
       }
 
+      // Always set user from Clerk data first (works offline)
+      const clerkUserData = {
+        clerkId: clerkUser.id,
+        email: clerkUser.primaryEmailAddress?.emailAddress,
+        firstName: clerkUser.firstName || '',
+        lastName: clerkUser.lastName || '',
+        fullName: clerkUser.fullName || `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim(),
+        imageUrl: clerkUser.imageUrl || '',
+      };
+      
+      setUser(clerkUserData);
+      setLoading(false);
+
+      // Try to sync with backend in background (optional)
       try {
-        setLoading(true);
-        const response = await userAPI.sync({
-          clerkId: clerkUser.id,
-          email: clerkUser.primaryEmailAddress?.emailAddress,
-          firstName: clerkUser.firstName || '',
-          lastName: clerkUser.lastName || '',
-          fullName: clerkUser.fullName || `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim(),
-          imageUrl: clerkUser.imageUrl || '',
-        });
-        setUser(response.data);
-        setError(null);
+        await userAPI.sync(clerkUserData);
       } catch (err) {
-        console.error('Failed to sync user:', err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
+        // Silently fail - app works without backend
+        console.log('Backend not available, using Clerk data only');
       }
     };
 

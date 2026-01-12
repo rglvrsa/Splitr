@@ -25,9 +25,20 @@
     box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
     font-family: 'A3', sans-serif;
     animation: modalSlideIn 0.3s ease;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 1vw;
+    pointer-events: none;
 }
 
 @keyframes modalSlideIn {
@@ -78,10 +89,15 @@
 /* Modal Form */
 .modal-form {
     padding: 1.5vw 2vw 2vw;
+    overflow-y: visible;
+    overflow-x: hidden;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 .form-group {
     margin-bottom: 1.5vw;
+    position: relative;
 }
 
 .form-group label {
@@ -99,6 +115,7 @@
 /* Select Wrapper */
 .select-wrapper {
     position: relative;
+    z-index: 1;
 }
 
 .select-wrapper select {
@@ -113,12 +130,15 @@
     appearance: none;
     cursor: pointer;
     transition: all 0.2s ease;
+    position: relative;
+    z-index: 10;
 }
 
 .select-wrapper select:focus {
     outline: none;
     border-color: #4a7c59;
     box-shadow: 0 0 0 3px rgba(74, 124, 89, 0.1);
+    z-index: 100;
 }
 
 .select-arrow {
@@ -564,4 +584,471 @@
 
 .payer-total .invalid {
     color: #ef4444;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .modal-container {
+        width: 90vw;
+        max-width: 500px;
+        border-radius: 16px;
+        max-height: 90vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    .modal-header {
+        padding: 16px 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 20px;
+    }
+
+    .close-btn {
+        padding: 8px;
+        font-size: 24px;
+    }
+
+    .modal-form {
+        padding: 16px 20px 20px;
+        overflow-y: visible;
+        overflow-x: hidden;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 8px;
+    }
+
+    .select-wrapper select,
+    .form-group input[type="text"] {
+        padding: 12px 14px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    .select-arrow {
+        right: 14px;
+        font-size: 18px;
+    }
+
+    .currency-symbol {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
+    .amount-input input {
+        padding: 12px 14px;
+        font-size: 18px;
+    }
+
+    .split-type-options {
+        padding: 4px;
+        border-radius: 8px;
+    }
+
+    .split-option {
+        padding: 10px 14px;
+        font-size: 14px;
+        gap: 6px;
+        border-radius: 8px;
+    }
+
+    .split-option svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .dollar-icon,
+    .percent-icon {
+        font-size: 14px;
+    }
+
+    .modal-actions {
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 16px;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        padding: 12px 20px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    .submit-btn svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .form-error {
+        padding: 12px 14px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .splits-section {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .splits-list {
+        gap: 10px;
+    }
+
+    .split-item {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .split-member-name {
+        font-size: 14px;
+    }
+
+    .split-input-wrapper input {
+        width: 70px;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .split-currency,
+    .split-percent {
+        font-size: 14px;
+    }
+
+    .split-calculated {
+        font-size: 13px;
+    }
+
+    .splits-total {
+        margin-top: 10px;
+        padding-top: 10px;
+        font-size: 14px;
+    }
+
+    .equal-split-preview {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .split-preview-text {
+        font-size: 14px;
+    }
+
+    .paid-by-header {
+        margin-bottom: 8px;
+    }
+
+    .multiple-payers-toggle {
+        font-size: 14px;
+        gap: 8px;
+    }
+
+    .multiple-payers-toggle input {
+        width: 18px;
+        height: 18px;
+    }
+
+    .multiple-payers-list {
+        padding: 10px;
+        border-radius: 8px;
+        max-height: 250px;
+    }
+
+    .payer-item {
+        padding: 12px;
+        border-radius: 8px;
+    }
+
+    .payer-name {
+        font-size: 15px;
+    }
+
+    .payer-amount-input {
+        padding: 8px 10px;
+        border-radius: 8px;
+    }
+
+    .payer-amount-input .currency-symbol {
+        font-size: 14px;
+        padding: 0;
+    }
+
+    .payer-amount-input input {
+        width: 70px;
+        font-size: 14px;
+    }
+
+    .payer-total {
+        padding: 8px 10px;
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-container {
+        width: 95vw;
+        border-radius: 12px;
+    }
+
+    .modal-header {
+        padding: 14px 16px;
+    }
+
+    .modal-header h2 {
+        font-size: 18px;
+    }
+
+    .modal-form {
+        padding: 14px 16px 16px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .form-group label {
+        font-size: 13px;
+    }
+
+    .select-wrapper select,
+    .form-group input[type="text"] {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+
+    .amount-input input {
+        font-size: 16px;
+    }
+
+    .split-option {
+        padding: 8px 10px;
+        font-size: 13px;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .payer-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .payer-amount-input input {
+        width: 100px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .modal-container {
+        width: 95vw;
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+
+    .modal-header {
+        padding: 16px 20px;
+    }
+
+    .modal-header h2 {
+        font-size: 20px;
+    }
+
+    .close-btn {
+        padding: 8px;
+    }
+
+    .modal-form {
+        padding: 16px 20px 20px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-group label {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+
+    .select-wrapper select,
+    .form-group input[type="text"] {
+        padding: 12px 14px;
+        font-size: 15px;
+        border-radius: 8px;
+    }
+
+    .select-arrow {
+        right: 14px;
+    }
+
+    .amount-input {
+        border-radius: 8px;
+    }
+
+    .currency-symbol {
+        padding: 12px 14px;
+        font-size: 15px;
+    }
+
+    .amount-input input {
+        padding: 12px 14px;
+        font-size: 18px;
+    }
+
+    .split-type-options {
+        border-radius: 8px;
+        padding: 6px;
+    }
+
+    .split-option {
+        padding: 10px 14px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .split-option svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .dollar-icon,
+    .percent-icon {
+        font-size: 14px;
+    }
+
+    .modal-actions {
+        gap: 12px;
+        margin-top: 20px;
+        padding-top: 16px;
+        flex-direction: column;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        width: 100%;
+        padding: 12px 20px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+
+    .form-error {
+        padding: 12px 14px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    .splits-section {
+        border-radius: 8px;
+        padding: 12px;
+    }
+
+    .splits-list {
+        gap: 10px;
+    }
+
+    .split-item {
+        padding: 12px 14px;
+        border-radius: 6px;
+    }
+
+    .split-member-name {
+        font-size: 14px;
+    }
+
+    .split-input-wrapper input {
+        width: 70px;
+        padding: 8px;
+        font-size: 14px;
+        border-radius: 6px;
+    }
+
+    .split-currency,
+    .split-percent {
+        font-size: 13px;
+    }
+
+    .split-calculated {
+        font-size: 12px;
+    }
+
+    .splits-total {
+        margin-top: 10px;
+        padding-top: 10px;
+        font-size: 13px;
+    }
+
+    .equal-split-preview {
+        border-radius: 8px;
+        padding: 12px;
+    }
+
+    .split-preview-text {
+        font-size: 14px;
+    }
+
+    .add-expense-modal {
+        max-height: 85vh;
+    }
+
+    .add-expense-modal-content {
+        max-height: 65vh;
+    }
+
+    .multiple-payers-toggle {
+        font-size: 13px;
+    }
+
+    .multiple-payers-toggle input {
+        width: 16px;
+        height: 16px;
+    }
+
+    .multiple-payers-list {
+        border-radius: 8px;
+        padding: 10px;
+        max-height: 200px;
+    }
+
+    .payer-item {
+        padding: 12px 14px;
+        border-radius: 6px;
+    }
+
+    .payer-name {
+        font-size: 15px;
+    }
+
+    .payer-amount-input {
+        border-radius: 6px;
+        padding: 6px 10px;
+    }
+
+    .payer-amount-input .currency-symbol {
+        font-size: 13px;
+        padding: 0;
+    }
+
+    .payer-amount-input input {
+        width: 70px;
+        font-size: 14px;
+    }
+
+    .payer-total {
+        padding: 8px 12px;
+        margin-top: 6px;
+        font-size: 13px;
+    }
 }

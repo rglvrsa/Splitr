@@ -27,7 +27,7 @@ const Profile = () => {
     if (upiId && !upiId.includes('@')) {
       setMessage({ 
         type: 'error', 
-        text: 'Invalid UPI ID format. It should be like: 9876543210@paytm or username@ybl' 
+        text: 'Invalid UPI ID format. It should be like: 9876543210@ybl (PhonePe) or phonenumber@okaxis (GPay)' 
       });
       setLoading(false);
       return;
@@ -114,17 +114,25 @@ const Profile = () => {
                 UPI ID
                 <span className="required">*Required for payments</span>
               </label>
-              <input
-                type="text"
-                id="upiId"
-                value={upiId}
-                onChange={(e) => setUpiId(e.target.value)}
-                placeholder="9876543210@paytm or username@ybl"
-              />
+              <div className="input-with-icons">
+                <input
+                  type="text"
+                  id="upiId"
+                  value={upiId}
+                  onChange={(e) => setUpiId(e.target.value)}
+                  placeholder="9876543210@ybl or username@okaxis"
+                />
+                <div className="payment-logos">
+                  <img src="/Images/logo4.png" alt="GPay" title="Google Pay" />
+                  <img src="/Images/logo5.jpg" alt="PhonePe" title="PhonePe" />
+                </div>
+              </div>
               <small>
-                Your UPI ID can be found in your payment app (GPay, PhonePe, Paytm, etc.)
+                <strong>Find your UPI ID:</strong>
                 <br />
-                Common formats: phonenumber@paytm, phonenumber@ybl, phonenumber@okaxis
+                📱 <strong>PhonePe:</strong> Profile → Your UPI ID (Format: phonenumber@ybl)
+                <br />
+                📱 <strong>Google Pay:</strong> Profile → UPI ID (Format: phonenumber@okaxis)
               </small>
             </div>
 
@@ -138,16 +146,6 @@ const Profile = () => {
               {loading ? 'Saving...' : 'Save Changes'}
             </button>
           </form>
-        </div>
-
-        <div className="info-card">
-          <h3>Why add UPI ID?</h3>
-          <ul>
-            <li>✅ Friends can pay you directly through GPay or PhonePe</li>
-            <li>✅ One-click payment settlements</li>
-            <li>✅ No need to share UPI ID every time</li>
-            <li>✅ Faster and easier group settlements</li>
-          </ul>
         </div>
       </div>
     </div>

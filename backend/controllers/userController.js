@@ -127,7 +127,7 @@ export const searchUsers = async (req, res) => {
         { fullName: { $regex: query, $options: "i" } },
       ],
     })
-      .select("_id email fullName imageUrl")
+      .select("_id email fullName imageUrl phoneNumber upiId")
       .limit(10);
 
     res.status(200).json({
@@ -139,6 +139,45 @@ export const searchUsers = async (req, res) => {
     res.status(500).json({ 
       success: false, 
       message: "Failed to search users",
+      error: error.message 
+    });
+  }
+};
+
+// Update user profile (phone number and UPI ID)
+export const updateProfile = async (req, res) => {
+  try {
+    const { clerkId } = req.params;
+    const { phoneNumber, upiId } = req.body;
+
+    const user = await User.findOneAndUpdate(
+      { clerkId },
+      {
+        $set: {
+          phoneNumber: phoneNumber || '',
+          upiId: upiId || '',
+        }
+      },
+      { new: true, runValidators: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ 
+        success: false, 
+        message: "User not found" 
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Profile updated successfully",
+      data: user,
+    });
+  } catch (error) {
+    console.error("Error updating profile:", error);
+    res.status(500).json({ 
+      success: false, 
+      message: "Failed to update profile",
       error: error.message 
     });
   }

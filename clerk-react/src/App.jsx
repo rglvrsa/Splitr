@@ -6,6 +6,7 @@ import Signup from './pages/Signup/Signup.jsx'
 import Group from './pages/Group/Group.jsx'
 import AllExpenses from './pages/AllExpenses/AllExpenses.jsx'
 import AllBalances from './pages/AllBalances/AllBalances.jsx'
+import Profile from './pages/Profile/Profile.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import { SignedIn, SignedOut } from "@clerk/clerk-react";
 import { useEffect, useState } from 'react';
@@ -72,6 +73,7 @@ function App() {
             <Route path="/group" element={<Group />} />
             <Route path="/all-expenses" element={<AllExpenses />} />
             <Route path="/all-balances" element={<AllBalances />} />
+            <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer />
         </AppProvider>

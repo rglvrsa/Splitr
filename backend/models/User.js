@@ -31,6 +31,14 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    phoneNumber: {
+      type: String,
+      default: "",
+    },
+    upiId: {
+      type: String,
+      default: "",
+    },
     // Groups user belongs to
     groups: [
       {

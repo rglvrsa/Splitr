@@ -57,26 +57,19 @@ const AllBalances = () => {
     }
     
     const receiverName = balance.toName;
+    const receiverUpiId = balance.toUser?.upiId;
     const amount = balance.amount.toFixed(2);
     const groupName = balance.groupName || 'Splitr';
     
-    // Ask user to enter the UPI ID
-    const upiId = prompt(`Enter UPI ID of ${receiverName}\n(e.g., 9876543210@paytm or username@ybl):`);
-    
-    if (!upiId || upiId.trim() === '') {
-      alert('UPI ID is required to proceed with payment.');
-      return;
-    }
-
-    // Validate basic UPI ID format (should contain @)
-    if (!upiId.includes('@')) {
-      alert('Invalid UPI ID format. UPI ID should be like: phonenumber@paytm or username@ybl');
+    // Check if receiver has UPI ID stored
+    if (!receiverUpiId || receiverUpiId.trim() === '') {
+      alert(`${receiverName} hasn't added their UPI ID yet. Please ask them to add it in their profile.`);
       return;
     }
 
     // Google Pay deep link
-    const gpayUrl = `tez://upi/pay?pa=${encodeURIComponent(upiId.trim())}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
-    const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId.trim())}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    const gpayUrl = `tez://upi/pay?pa=${encodeURIComponent(receiverUpiId)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    const upiUrl = `upi://pay?pa=${encodeURIComponent(receiverUpiId)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
     
     const link = document.createElement('a');
     link.href = gpayUrl;
@@ -101,26 +94,19 @@ const AllBalances = () => {
     }
     
     const receiverName = balance.toName;
+    const receiverUpiId = balance.toUser?.upiId;
     const amount = balance.amount.toFixed(2);
     const groupName = balance.groupName || 'Splitr';
     
-    // Ask user to enter the UPI ID
-    const upiId = prompt(`Enter UPI ID of ${receiverName}\n(e.g., 9876543210@paytm or username@ybl):`);
-    
-    if (!upiId || upiId.trim() === '') {
-      alert('UPI ID is required to proceed with payment.');
-      return;
-    }
-
-    // Validate basic UPI ID format (should contain @)
-    if (!upiId.includes('@')) {
-      alert('Invalid UPI ID format. UPI ID should be like: phonenumber@paytm or username@ybl');
+    // Check if receiver has UPI ID stored
+    if (!receiverUpiId || receiverUpiId.trim() === '') {
+      alert(`${receiverName} hasn't added their UPI ID yet. Please ask them to add it in their profile.`);
       return;
     }
 
     // PhonePe deep link
-    const phonepeUrl = `phonepe://pay?pa=${encodeURIComponent(upiId.trim())}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
-    const upiUrl = `upi://pay?pa=${encodeURIComponent(upiId.trim())}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    const phonepeUrl = `phonepe://pay?pa=${encodeURIComponent(receiverUpiId)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
+    const upiUrl = `upi://pay?pa=${encodeURIComponent(receiverUpiId)}&pn=${encodeURIComponent(receiverName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Settlement from ${groupName}`)}`;
     
     const link = document.createElement('a');
     link.href = phonepeUrl;

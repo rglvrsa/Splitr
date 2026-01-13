@@ -14,6 +14,9 @@ const Navbar = () => {
           <Link to="/">   
          <div id="navdash"><i className="ri-dashboard-line"></i> Dashboard</div>
          </Link>
+          <Link to="/profile">   
+         <div id="navprofile"><i className="ri-user-settings-line"></i> Profile</div>
+         </Link>
         <UserButton 
             appearance={{
               elements: {

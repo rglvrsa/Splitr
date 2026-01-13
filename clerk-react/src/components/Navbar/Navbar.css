@@ -132,6 +132,17 @@
     #navdash i, #navprofile i {
         font-size: 16px;
     }
+
+    /* Increase Clerk UserButton size on tablet */
+    #navbarright .cl-userButtonBox {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    #navbarright .cl-avatarBox {
+        width: 38px !important;
+        height: 38px !important;
+    }
 }
 
 @media (max-width: 480px) {
@@ -156,5 +167,33 @@
 
     #navdash i, #navprofile i {
         font-size: 14px;
+    }
+
+    /* Increase Clerk UserButton size on mobile */
+    #navbarright .cl-userButtonBox {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    #navbarright .cl-avatarBox {
+        width: 38px !important;
+        height: 38px !important;
+    }
+
+    #navbarright .cl-userButtonPopoverCard {
+        min-width: 280px !important;
+        min-height: auto !important;
+    }
+
+    #navbarright .cl-userButtonPopoverActionButton {
+        font-size: 14px !important;
+    }
+
+    #navbarright .cl-userPreviewMainIdentifier {
+        font-size: 16px !important;
+    }
+
+    #navbarright .cl-userPreviewSecondaryIdentifier {
+        font-size: 13px !important;
     }
 }

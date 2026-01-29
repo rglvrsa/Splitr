@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { useApp } from '../../context/AppContext';
 import { userAPI } from '../../services/api';

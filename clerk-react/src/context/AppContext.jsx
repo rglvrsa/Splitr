@@ -242,6 +242,7 @@ export const AppProvider = ({ children }) => {
   const value = {
     // User
     user,
+    setUser,
     clerkUser,
     clerkId: clerkUser?.id,
     loading,

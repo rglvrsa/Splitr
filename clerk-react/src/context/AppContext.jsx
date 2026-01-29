@@ -33,14 +33,27 @@ export const AppProvider = ({ children }) => {
         lastName: clerkUser.lastName || '',
         fullName: clerkUser.fullName || `${clerkUser.firstName || ''} ${clerkUser.lastName || ''}`.trim(),
         imageUrl: clerkUser.imageUrl || '',
+        phoneNumber: '',
+        upiId: '',
       };
       
       setUser(clerkUserData);
       setLoading(false);
 
-      // Try to sync with backend in background (optional)
+      // Try to sync with backend and get full user data
       try {
-        await userAPI.sync(clerkUserData);
+        const syncResponse = await userAPI.sync(clerkUserData);
+        
+        // Fetch complete user profile with phoneNumber and upiId
+        if (syncResponse?.data?._id || syncResponse?.data?.clerkId) {
+          const profileResponse = await userAPI.getProfile(clerkUser.id);
+          if (profileResponse?.data) {
+            setUser({
+              ...clerkUserData,
+              ...profileResponse.data,
+            });
+          }
+        }
       } catch (err) {
         // Silently fail - app works without backend
         console.log('Backend not available, using Clerk data only');
@@ -130,9 +143,9 @@ export const AppProvider = ({ children }) => {
     }
   };
 
-  const addMemberToGroup = async (groupId, email) => {
+  const addMemberToGroup = async (groupId, email, phoneNumber) => {
     try {
-      const response = await groupAPI.addMember(groupId, email);
+      const response = await groupAPI.addMember(groupId, email, phoneNumber);
       setGroups(prev => prev.map(g => g._id === groupId ? response.data : g));
       return response.data;
     } catch (err) {

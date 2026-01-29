@@ -45,6 +45,10 @@ export const userAPI = {
     body: JSON.stringify(userData),
   }),
   getProfile: (clerkId) => apiRequest(`/users/profile/${clerkId}`),
+  updateProfile: (clerkId, data) => apiRequest(`/users/profile/${clerkId}`, {
+    method: 'PUT',
+    body: JSON.stringify(data),
+  }),
   getByEmail: (email) => apiRequest(`/users/email/${encodeURIComponent(email)}`),
   search: (query) => apiRequest(`/users/search?query=${encodeURIComponent(query)}`),
 };
@@ -64,9 +68,9 @@ export const groupAPI = {
   delete: (groupId) => apiRequest(`/groups/${groupId}`, {
     method: 'DELETE',
   }),
-  addMember: (groupId, email) => apiRequest(`/groups/${groupId}/members`, {
+  addMember: (groupId, email, phoneNumber) => apiRequest(`/groups/${groupId}/members`, {
     method: 'POST',
-    body: JSON.stringify({ email }),
+    body: JSON.stringify({ email, phoneNumber }),
   }),
   removeMember: (groupId, userId) => apiRequest(`/groups/${groupId}/members/${userId}`, {
     method: 'DELETE',

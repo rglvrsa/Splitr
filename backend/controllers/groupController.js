@@ -41,8 +41,8 @@ export const createGroup = async (req, res) => {
 
     // Populate and return
     const populatedGroup = await Group.findById(group._id)
-      .populate("createdBy", "fullName email imageUrl")
-      .populate("members.user", "fullName email imageUrl");
+      .populate("createdBy", "fullName email imageUrl phoneNumber")
+      .populate("members.user", "fullName email imageUrl phoneNumber");
 
     res.status(201).json({
       success: true,
@@ -76,8 +76,8 @@ export const getUserGroups = async (req, res) => {
       "members.user": user._id,
       isActive: true,
     })
-      .populate("createdBy", "fullName email imageUrl")
-      .populate("members.user", "fullName email imageUrl")
+      .populate("createdBy", "fullName email imageUrl phoneNumber")
+      .populate("members.user", "fullName email imageUrl phoneNumber")
       .sort({ updatedAt: -1 });
 
     res.status(200).json({
@@ -100,8 +100,8 @@ export const getGroupById = async (req, res) => {
     const { groupId } = req.params;
 
     const group = await Group.findById(groupId)
-      .populate("createdBy", "fullName email imageUrl")
-      .populate("members.user", "fullName email imageUrl");
+      .populate("createdBy", "fullName email imageUrl phoneNumber")
+      .populate("members.user", "fullName email imageUrl phoneNumber");
 
     if (!group) {
       return res.status(404).json({
@@ -128,12 +128,13 @@ export const getGroupById = async (req, res) => {
 export const addMember = async (req, res) => {
   try {
     const { groupId } = req.params;
-    const { email } = req.body;
+    const { email, phoneNumber } = req.body;
 
-    if (!email) {
+    // Check if at least one identifier is provided
+    if (!email && !phoneNumber) {
       return res.status(400).json({
         success: false,
-        message: "Email is required",
+        message: "Email or phone number is required",
       });
     }
 
@@ -146,12 +147,34 @@ export const addMember = async (req, res) => {
       });
     }
 
-    // Find user to add
-    const userToAdd = await User.findOne({ email: email.toLowerCase() });
+    // Find user to add - try both email and phone number
+    let userToAdd = null;
+    let searchCriteria = {};
+
+    if (email && phoneNumber) {
+      // If both provided, search by either
+      searchCriteria = {
+        $or: [
+          { email: email.toLowerCase() },
+          { phoneNumber: phoneNumber }
+        ]
+      };
+    } else if (email) {
+      searchCriteria = { email: email.toLowerCase() };
+    } else if (phoneNumber) {
+      searchCriteria = { phoneNumber: phoneNumber };
+    }
+
+    userToAdd = await User.findOne(searchCriteria);
+    
     if (!userToAdd) {
       return res.status(404).json({
         success: false,
-        message: "User not found. They need to sign up first.",
+        message: email && phoneNumber 
+          ? "User not found with provided email or phone number. They need to sign up first."
+          : email
+            ? "User not found with provided email. They need to sign up first."
+            : "User not found with provided phone number. They need to sign up first.",
       });
     }
 
@@ -179,8 +202,8 @@ export const addMember = async (req, res) => {
 
     // Return updated group
     const updatedGroup = await Group.findById(groupId)
-      .populate("createdBy", "fullName email imageUrl")
-      .populate("members.user", "fullName email imageUrl");
+      .populate("createdBy", "fullName email imageUrl phoneNumber")
+      .populate("members.user", "fullName email imageUrl phoneNumber");
 
     res.status(200).json({
       success: true,
@@ -239,8 +262,8 @@ export const removeMember = async (req, res) => {
     });
 
     const updatedGroup = await Group.findById(groupId)
-      .populate("createdBy", "fullName email imageUrl")
-      .populate("members.user", "fullName email imageUrl");
+      .populate("createdBy", "fullName email imageUrl phoneNumber")
+      .populate("members.user", "fullName email imageUrl phoneNumber");
 
     res.status(200).json({
       success: true,
@@ -268,8 +291,8 @@ export const updateGroup = async (req, res) => {
       { name, description },
       { new: true }
     )
-      .populate("createdBy", "fullName email imageUrl")
-      .populate("members.user", "fullName email imageUrl");
+      .populate("createdBy", "fullName email imageUrl phoneNumber")
+      .populate("members.user", "fullName email imageUrl phoneNumber");
 
     if (!group) {
       return res.status(404).json({

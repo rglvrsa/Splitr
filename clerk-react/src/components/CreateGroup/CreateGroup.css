@@ -1,6 +1,9 @@
 /* Create Group Modal Specific Styles */
 .create-group-modal {
     width: 30vw;
+    pointer-events: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
 }
 
 .create-group-modal textarea {

@@ -68,6 +68,7 @@ const Group = () => {
       initials: (m.user?.fullName?.split(' ').map(n => n[0]).join('') || m.user?.email?.[0] || 'U').toUpperCase(),
       name: m.user?.fullName || m.user?.email || 'Unknown',
       email: m.user?.email,
+      phoneNumber: m.user?.phoneNumber,
       imageUrl: m.user?.imageUrl
     })) || [],
     expenses: [],
@@ -126,11 +127,11 @@ const Group = () => {
     setIsAddMemberOpen(false);
   };
 
-  const handleAddMember = async (email) => {
+  const handleAddMember = async (email, phoneNumber) => {
     if (!selectedGroup) return;
     try {
       // Use the response from the API to update the selected group immediately
-      const updated = await addMemberToGroup(selectedGroup.id, email);
+      const updated = await addMemberToGroup(selectedGroup.id, email, phoneNumber);
 
       // Transform the returned backend group into the UI-friendly shape
       const updatedGroup = {
@@ -142,6 +143,7 @@ const Group = () => {
           initials: (m.user?.fullName?.split(' ').map(n => n[0]).join('') || m.user?.email?.[0] || 'U').toUpperCase(),
           name: m.user?.fullName || m.user?.email || 'Unknown',
           email: m.user?.email,
+          phoneNumber: m.user?.phoneNumber,
           imageUrl: m.user?.imageUrl
         })) || [],
         expenses: [],

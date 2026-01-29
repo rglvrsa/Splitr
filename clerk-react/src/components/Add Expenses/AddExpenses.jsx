@@ -331,9 +331,15 @@ const AddExpenses = ({ isOpen, onClose, groups: propGroups, selectedGroup, membe
     }
   };
 
+  // Handle wheel events for modal content scrolling
+  const handleWheel = (e) => {
+    // Allow the default wheel behavior for scrolling
+    e.stopPropagation();
+  };
+
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-container add-expense-modal">
+      <div className="modal-container add-expense-modal" onWheel={handleWheel}>
         <div className="modal-header">
           <h2>Add Expense</h2>
           <button className="close-btn" onClick={onClose}>
@@ -344,7 +350,7 @@ const AddExpenses = ({ isOpen, onClose, groups: propGroups, selectedGroup, membe
           </button>
         </div>
 
-  <div className="add-expense-modal-content" data-lenis-prevent>
+  <div className="add-expense-modal-content" data-lenis-prevent onWheel={handleWheel}>
           <form className="modal-form" onSubmit={handleSubmit}>
             {error && <div className="form-error">{error}</div>}
             {/* ...existing form content... */}

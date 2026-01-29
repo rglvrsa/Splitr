@@ -53,9 +53,15 @@ const CreateGroup = ({ isOpen, onClose, onCreateGroup }) => {
     }
   };
 
+  // Handle wheel events for modal content scrolling
+  const handleWheel = (e) => {
+    // Allow the default wheel behavior for scrolling
+    e.stopPropagation();
+  };
+
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-container create-group-modal">
+      <div className="modal-container create-group-modal" onWheel={handleWheel}>
         <div className="modal-header">
           <h2>Create New Group</h2>
           <button className="close-btn" onClick={onClose}>

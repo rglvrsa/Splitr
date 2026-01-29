@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useUser } from '@clerk/clerk-react';
 import { useApp } from '../../context/AppContext';
+import { userAPI } from '../../services/api';
 import './Profile.css';
 
 const Profile = () => {
@@ -43,29 +44,36 @@ const Profile = () => {
       return;
     }
 
-    try {
-      const response = await fetch(
-        `https://splitr-lake.vercel.app/api/users/profile/${clerkUser.id}`,
-        {
-          method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ phoneNumber, upiId }),
-        }
-      );
+    // Check if clerkUser is available
+    if (!clerkUser || !clerkUser.id) {
+      setMessage({ type: 'error', text: 'User not logged in. Please refresh the page.' });
+      setLoading(false);
+      return;
+    }
 
-      const data = await response.json();
+    try {
+      const data = await userAPI.updateProfile(clerkUser.id, { 
+        phoneNumber: phoneNumber.trim(), 
+        upiId: upiId.trim() 
+      });
 
       if (data.success) {
         setUser(data.data);
         setMessage({ type: 'success', text: 'Profile updated successfully!' });
+        
+        // Clear success message after 3 seconds
+        setTimeout(() => {
+          setMessage({ type: '', text: '' });
+        }, 3000);
       } else {
         setMessage({ type: 'error', text: data.message || 'Failed to update profile' });
       }
     } catch (error) {
       console.error('Error updating profile:', error);
-      setMessage({ type: 'error', text: 'Network error. Please try again.' });
+      setMessage({ 
+        type: 'error', 
+        text: error.message || 'Unable to connect to server. Please check your internet connection and try again.' 
+      });
     } finally {
       setLoading(false);
     }

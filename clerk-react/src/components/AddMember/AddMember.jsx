@@ -3,26 +3,45 @@ import './AddMember.css'
 
 const AddMember = ({ isOpen, onClose, members, onAddMember }) => {
   const [email, setEmail] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [inputMode, setInputMode] = useState('email'); // 'email' or 'phone'
 
-  // Stop/Start Lenis when modal opens/closes
+  // Stop/Start Lenis and lock body scroll when modal opens/closes
   useEffect(() => {
     if (isOpen) {
       window.lenis?.stop();
+      // Prevent body scroll
+      document.body.style.overflow = 'hidden';
     } else {
       window.lenis?.start();
+      // Restore body scroll
+      document.body.style.overflow = '';
     }
     return () => {
       window.lenis?.start();
+      document.body.style.overflow = '';
     };
   }, [isOpen]);
+
+  // Handle wheel events for modal content scrolling
+  const handleWheel = (e) => {
+    // Allow the default wheel behavior for scrolling
+    e.stopPropagation();
+  };
 
   if (!isOpen) return null;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email.trim()) {
-      onAddMember(email);
+    if (inputMode === 'email' && email.trim()) {
+      onAddMember(email.trim(), null);
       setEmail('');
+      setPhoneNumber('');
+      onClose();
+    } else if (inputMode === 'phone' && phoneNumber.trim()) {
+      onAddMember(null, phoneNumber.trim());
+      setEmail('');
+      setPhoneNumber('');
       onClose();
     }
   };
@@ -33,9 +52,15 @@ const AddMember = ({ isOpen, onClose, members, onAddMember }) => {
     }
   };
 
+  const switchMode = (mode) => {
+    setInputMode(mode);
+    setEmail('');
+    setPhoneNumber('');
+  };
+
   return (
     <div className="modal-overlay" onClick={handleOverlayClick}>
-      <div className="modal-container add-member-modal">
+      <div className="modal-container add-member-modal" onWheel={handleWheel}>
         <div className="modal-header">
           <h2>Add Member</h2>
           <button className="close-btn" onClick={onClose}>
@@ -47,22 +72,62 @@ const AddMember = ({ isOpen, onClose, members, onAddMember }) => {
         </div>
 
         <form className="modal-form" onSubmit={handleSubmit}>
-          <div className="form-group">
-            <label>Member Email</label>
-            <div className="email-input-wrapper">
-              <svg className="email-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          {/* Toggle Buttons */}
+          <div className="input-mode-toggle">
+            <button
+              type="button"
+              className={`toggle-btn ${inputMode === 'email' ? 'active' : ''}`}
+              onClick={() => switchMode('email')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
               </svg>
-              <input 
-                type="email" 
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter member's email address"
-                required
-              />
-            </div>
-            <span className="helper-text">The person must have an account to be added as a member</span>
+              Email
+            </button>
+            <button
+              type="button"
+              className={`toggle-btn ${inputMode === 'phone' ? 'active' : ''}`}
+              onClick={() => switchMode('phone')}
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+              Phone
+            </button>
+          </div>
+
+          <div className="form-group">
+            {inputMode === 'email' ? (
+              <>
+                <label>Member Email</label>
+                <div className="email-input-wrapper">
+                 <input 
+                    type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="Enter member's email address"
+                    required
+                  />
+                </div>
+                <span className="helper-text">The person must have an account to be added as a member</span>
+              </>
+            ) : (
+              <>
+                <label>Member Phone Number</label>
+                <div className="email-input-wrapper">
+                 
+                  <input 
+                    type="tel" 
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    placeholder="Enter member's phone number"
+                    required
+                  />
+                </div>
+                <span className="helper-text">The person must have registered with this phone number</span>
+              </>
+            )}
           </div>
 
           <div className="current-members-section">
@@ -84,6 +149,9 @@ const AddMember = ({ isOpen, onClose, members, onAddMember }) => {
                   <div className="member-info">
                     <span className="member-name">{member.name}</span>
                     <span className="member-email">{member.email}</span>
+                    {member.phoneNumber && (
+                      <span className="member-phone">{member.phoneNumber}</span>
+                    )}
                   </div>
                   <span className="member-badge">Member</span>
                 </div>

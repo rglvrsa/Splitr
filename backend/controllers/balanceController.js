@@ -48,8 +48,8 @@ export const getGroupBalances = async (req, res) => {
 
     // Get all balances in the group
     const allBalances = await Balance.find({ group: groupId })
-      .populate("fromUser", "fullName email imageUrl")
-      .populate("toUser", "fullName email imageUrl");
+      .populate("fromUser", "fullName email imageUrl upiId phoneNumber")
+      .populate("toUser", "fullName email imageUrl upiId phoneNumber");
 
     // Aggregate balances by unique user pair to avoid duplicates like A->B=100 and B->A=50 so A->B=50
     const balanceMap = new Map();
@@ -156,8 +156,8 @@ export const getSimplifiedBalances = async (req, res) => {
 
     // Get all balances in the group
     const allBalances = await Balance.find({ group: groupId })
-      .populate("fromUser", "fullName email imageUrl")
-      .populate("toUser", "fullName email imageUrl");
+      .populate("fromUser", "fullName email imageUrl upiId phoneNumber")
+      .populate("toUser", "fullName email imageUrl upiId phoneNumber");
 
     // Build net balance for each user
     const netBalances = new Map(); // userId -> net amount (positive = they are owed, negative = they owe)

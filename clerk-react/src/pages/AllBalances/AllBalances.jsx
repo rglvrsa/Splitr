@@ -61,8 +61,14 @@ const AllBalances = () => {
     const amount = balance.amount.toFixed(2);
     const groupName = balance.groupName || 'Splitr';
     
+    // Debug logging
+    console.log('Balance object:', balance);
+    console.log('Receiver toUser:', balance.toUser);
+    console.log('Receiver UPI ID:', receiverUpiId);
+    
     // Check if receiver has UPI ID stored
     if (!receiverUpiId || receiverUpiId.trim() === '') {
+      console.error('UPI ID not found or empty for receiver:', receiverName);
       alert(`${receiverName} hasn't added their UPI ID yet. Please ask them to add it in their profile.`);
       return;
     }
@@ -98,8 +104,14 @@ const AllBalances = () => {
     const amount = balance.amount.toFixed(2);
     const groupName = balance.groupName || 'Splitr';
     
+    // Debug logging
+    console.log('Balance object:', balance);
+    console.log('Receiver toUser:', balance.toUser);
+    console.log('Receiver UPI ID:', receiverUpiId);
+    
     // Check if receiver has UPI ID stored
     if (!receiverUpiId || receiverUpiId.trim() === '') {
+      console.error('UPI ID not found or empty for receiver:', receiverName);
       alert(`${receiverName} hasn't added their UPI ID yet. Please ask them to add it in their profile.`);
       return;
     }

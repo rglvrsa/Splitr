@@ -93,20 +93,20 @@ balanceSchema.statics.updateBalance = async function (
 // Static method to get all balances for a user
 balanceSchema.statics.getUserBalances = async function (userId) {
   const owes = await this.find({ fromUser: userId, amount: { $gt: 0 } })
-    .populate("toUser", "fullName email imageUrl")
+    .populate("toUser", "fullName email imageUrl upiId phoneNumber")
     .populate("group", "name");
 
   const owed = await this.find({ toUser: userId, amount: { $gt: 0 } })
-    .populate("fromUser", "fullName email imageUrl")
+    .populate("fromUser", "fullName email imageUrl upiId phoneNumber")
     .populate("group", "name");
 
   // Also check reverse (where user is toUser but amount is negative)
   const owesReverse = await this.find({ toUser: userId, amount: { $lt: 0 } })
-    .populate("fromUser", "fullName email imageUrl")
+    .populate("fromUser", "fullName email imageUrl upiId phoneNumber")
     .populate("group", "name");
 
   const owedReverse = await this.find({ fromUser: userId, amount: { $lt: 0 } })
-    .populate("toUser", "fullName email imageUrl")
+    .populate("toUser", "fullName email imageUrl upiId phoneNumber")
     .populate("group", "name");
 
   return {

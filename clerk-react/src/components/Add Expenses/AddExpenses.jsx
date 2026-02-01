@@ -571,25 +571,25 @@ const AddExpenses = ({ isOpen, onClose, groups: propGroups, selectedGroup, membe
               </p>
             </div>
           )}
-
-          <div className="modal-actions">
-            <button type="button" className="cancel-btn" onClick={onClose} disabled={isSubmitting}>
-              Cancel
-            </button>
-            <button type="submit" className="submit-btn add-expense-submit" disabled={isSubmitting}>
-              {isSubmitting ? (
-                'Adding...'
-              ) : (
-                <>
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
-                  Add Expense
-                </>
-              )}
-            </button>
-          </div>
           </form>
+        </div>
+
+        <div className="modal-actions">
+          <button type="button" className="cancel-btn" onClick={onClose} disabled={isSubmitting}>
+            Cancel
+          </button>
+          <button type="button" className="submit-btn add-expense-submit" onClick={handleSubmit} disabled={isSubmitting}>
+            {isSubmitting ? (
+              'Adding...'
+            ) : (
+              <>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="20 6 9 17 4 12"></polyline>
+                </svg>
+                Add Expense
+              </>
+            )}
+          </button>
         </div>
       </div>
     </div>

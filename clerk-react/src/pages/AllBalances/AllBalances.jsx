@@ -20,6 +20,11 @@ const AllBalances = () => {
 
   // Handle settle balance - just mark as settled
   const handleSettle = async (balance) => {
+    // Prevent multiple clicks
+    if (settling === balance._id) {
+      return;
+    }
+    
     console.log("Settling balance:", balance);
     setSettling(balance._id);
     try {
@@ -44,6 +49,8 @@ const AllBalances = () => {
       await fetchBalances();
     } catch (error) {
       console.error('Error settling balance:', error);
+      const errorMessage = error.message || 'Failed to settle balance. Please try again.';
+      alert(errorMessage);
     } finally {
       setSettling(null);
     }

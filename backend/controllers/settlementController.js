@@ -83,6 +83,60 @@ export const createSettlement = async (req, res) => {
       });
     }
 
+    // Check if there's an actual balance to settle
+    // Find the balance record between these two users
+    const [user1, user2] =
+      payer._id.toString() < receiver._id.toString()
+        ? [payer._id, receiver._id]
+        : [receiver._id, payer._id];
+
+    const balanceRecord = await Balance.findOne({
+      group: groupId,
+      fromUser: user1,
+      toUser: user2,
+    });
+
+    // Log for debugging
+    console.log("Balance check:");
+    console.log("Payer:", payer.fullName, payer._id.toString());
+    console.log("Receiver:", receiver.fullName, receiver._id.toString());
+    console.log("User1 (smaller ID):", user1.toString());
+    console.log("User2 (larger ID):", user2.toString());
+    console.log("Balance record:", balanceRecord);
+
+    if (!balanceRecord) {
+      return res.status(400).json({
+        success: false,
+        message: "No balance found between these users in this group",
+      });
+    }
+
+    // Calculate the actual debt
+    // If payer is user1, then positive balance means user1 owes user2 (receiver)
+    // If payer is user2, then negative balance means user2 owes user1 (receiver)
+    const isPayerUser1 = payer._id.toString() === user1.toString();
+    const actualDebt = isPayerUser1 ? balanceRecord.amount : -balanceRecord.amount;
+
+    console.log("isPayerUser1:", isPayerUser1);
+    console.log("Balance amount:", balanceRecord.amount);
+    console.log("Actual debt (payer owes receiver):", actualDebt);
+
+    // Check if payer actually owes receiver
+    if (actualDebt <= 0) {
+      return res.status(400).json({
+        success: false,
+        message: `${payer.fullName || 'User'} does not owe ${receiver.fullName || 'User'} any money in this group. Current balance: ₹${actualDebt.toFixed(2)}`,
+      });
+    }
+
+    // Check if settlement amount exceeds the debt
+    if (amount > actualDebt) {
+      return res.status(400).json({
+        success: false,
+        message: `Settlement amount (₹${amount}) exceeds the actual debt (₹${actualDebt.toFixed(2)})`,
+      });
+    }
+
     // Create settlement record
     const settlement = await Settlement.create({
       group: groupId,

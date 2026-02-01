@@ -14,6 +14,7 @@ const Group = () => {
   const [isAddExpenseOpen, setIsAddExpenseOpen] = useState(false);
   const [isAddMemberOpen, setIsAddMemberOpen] = useState(false);
   const [isCreateGroupOpen, setIsCreateGroupOpen] = useState(false);
+  const [settling, setSettling] = useState(null);
   
   // Group-specific data
   const [groupExpenses, setGroupExpenses] = useState([]);
@@ -304,6 +305,13 @@ const Group = () => {
 
   // Handle settle button click (for local calculations - legacy)
   const handleSettle = async (settlement) => {
+    // Prevent multiple clicks - create unique key for this settlement
+    const settlementKey = `${settlement.fromId}-${settlement.toId}`;
+    if (settling === settlementKey) {
+      return;
+    }
+    
+    setSettling(settlementKey);
     try {
       await settleUp({
         groupId: selectedGroup.id,
@@ -317,6 +325,9 @@ const Group = () => {
       await refreshGroupData();
     } catch (err) {
       console.error('Failed to settle:', err);
+      alert('Failed to settle balance. Please try again.');
+    } finally {
+      setSettling(null);
     }
   };
 
@@ -380,7 +391,15 @@ const Group = () => {
 
   // Handle settle button click (for API-based simplified settlements)
   const handleSettleFromAPI = async (settlement) => {
+    // Prevent multiple clicks - create unique key for this settlement
+    const settlementKey = `${settlement.from?._id}-${settlement.to?._id}`;
+    if (settling === settlementKey) {
+      return;
+    }
+    
+    setSettling(settlementKey);
     try {
+      console.log("Settlement object:", settlement);
       await settleUp({
         groupId: selectedGroup.id,
         paidBy: settlement.from?._id,
@@ -393,6 +412,10 @@ const Group = () => {
       await refreshGroupData();
     } catch (err) {
       console.error('Failed to settle:', err);
+      const errorMessage = err.message || 'Failed to settle balance. Please try again.';
+      alert(errorMessage);
+    } finally {
+      setSettling(null);
     }
   };
 
@@ -611,8 +634,12 @@ const Group = () => {
                     </div>
                     <div className="settle-amount">₹{settlement.amount.toFixed(2)}</div>
                     <div className="settle-actions">
-                      <button className="settle-btn-simple" onClick={() => handleSettleFromAPI(settlement)}>
-                        Settle
+                      <button 
+                        className="settle-btn-simple" 
+                        onClick={() => handleSettleFromAPI(settlement)}
+                        disabled={settling === `${settlement.from?._id}-${settlement.to?._id}`}
+                      >
+                        {settling === `${settlement.from?._id}-${settlement.to?._id}` ? 'Settling...' : 'Settle'}
                       </button>
                     </div>
                   </div>

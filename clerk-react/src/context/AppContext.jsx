@@ -230,10 +230,12 @@ export const AppProvider = ({ children }) => {
 
       console.log("Sending settlement data:", data);
       const response = await settlementAPI.create(data);
+      console.log("Settlement response:", response);
       // Refresh balances after settlement
       await fetchBalances();
       return response.data;
     } catch (err) {
+      console.error("Settlement error:", err);
       throw err;
     }
   };
